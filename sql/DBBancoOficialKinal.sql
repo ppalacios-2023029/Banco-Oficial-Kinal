@@ -90,3 +90,41 @@ create table PagosPrestamos (
     primary key PK_codigoPagos(codigoPagos),
     constraint FK_PagosPrestamos_Prestamos foreign key(codigoPrestamo) references Prestamos(codigoPrestamo)
 );
+
+create table Tarjetas (
+    numeroTarjeta varchar(19) not null, -- Crear una numero de cuenta falso de xxxx-xxxx-xxxx-xxxx
+    tipoTarjeta varchar(50) not null,
+    CVC varchar(3) not null,
+    fechaVencimiento date not null,
+    fechaEmision date not null,
+    limiteDeCredito decimal(15, 2), -- Depende del tipo de tarjeta
+    codigoCliente int not null,
+    primary key PK_numeroTarjeta(numeroTarjeta),
+    constraint FK_Tarjetas_Clientes foreign key(codigoCliente) references Clientes(codigoCliente)
+);
+
+create table Seguro(
+	numeroSeguro INT not null,
+    numeroPoliza VARCHAR(20) NOT NULL,
+    tipoSeguro VARCHAR(20) NOT NULL,
+    montoAsegurado DECIMAL(10, 2) NOT NULL,
+    primaMensual DECIMAL(10, 2) NOT NULL,
+    fechaExpiracion DATE NOT NULL,
+    codigoCliente int not null,
+    primary key PK_numeroSeguro(numeroSeguro),
+    constraint FK_Seguro_Clientes foreign key(codigoCliente) references Clientes(codigoCliente)
+);
+
+CREATE TABLE DetalleCuenta (
+    codigoDetalleCuenta INT not null AUTO_INCREMENT,
+    fechaDetalle DATE NOT NULL,
+    tipoOperacion VARCHAR(20) NOT NULL,
+    EstadoCuenta VARCHAR(20) NOT NULL,
+    codigoCliente INT,
+    codigoEmpleado INT,
+    codigoSucursal INT,
+    primary key PK_codigoDetalleCuenta(codigoDetalleCuenta),
+    constraint FK_DetalleCuenta_Clientes foreign key(codigoCliente) references Clientes(codigoCliente),
+    constraint FK_DetalleCuenta_Empleados foreign key(codigoEmpleado) references Empleados(codigoEmpleado),
+    constraint FK_DetalleCuenta_Sucursales foreign key(codigoSucursal) references Sucursales(codigoSucursal)
+);
