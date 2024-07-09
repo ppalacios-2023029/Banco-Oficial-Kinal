@@ -56,3 +56,14 @@ create table Sucursales (
     primary key PK_codigoSucursal(codigoSucursal),
     constraint FK_Sucursales_Empleados foreign key (codigoEmpleado) references Empleados(codigoEmpleado)
 );
+
+create table Transaccion(
+	codigoTransaccion int not null auto_increment,
+    estadoTransaccion varchar(20) not null,
+    tipoTransaccion varchar(20) not null,
+    monto decimal(10, 2) not null,
+    fecha date not null,
+    codigoCliente int not null,
+    primary key PK_codigoTransaccion(codigoTransaccion),
+	constraint FK_Transaccion_Clientes foreign key(codigoCliente) references Clientes(codigoCliente)
+);
