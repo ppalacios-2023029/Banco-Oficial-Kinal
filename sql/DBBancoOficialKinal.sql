@@ -79,3 +79,14 @@ create table Prestamos (
     primary key PK_codigoPrestamo(codigoPrestamo),
     constraint FK_Prestamos_Clientes foreign key(codigoCliente) references Clientes(codigoCliente)
 );
+
+create table PagosPrestamos (
+    codigoPagos int not null auto_increment,
+    monto decimal(10,2) not null,
+    fechaInicio date not null,
+    fechaVencimiento date not null,
+    estadoPago varchar(50) not null,
+    codigoPrestamo int not null,
+    primary key PK_codigoPagos(codigoPagos),
+    constraint FK_PagosPrestamos_Prestamos foreign key(codigoPrestamo) references Prestamos(codigoPrestamo)
+);
