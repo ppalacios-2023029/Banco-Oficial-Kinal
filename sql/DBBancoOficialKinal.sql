@@ -33,3 +33,15 @@ create table CargoEmpleado(
     nivelJerarquico int,
     primary key PK_codigoCargoEmpleado(codigoCargoEmpleado)
 );
+
+create table Empleados (
+    codigoEmpleado int not null auto_increment,
+    nombreEmpleado varchar(50) not null,
+    apellidoEmpleado varchar(50) not null,
+    cargo varchar(50) not null,
+    salario DECIMAL(10, 2) NOT NULL,
+    oficina VARCHAR(50) NOT NULL,
+    codigoCargoEmpleado int,
+    primary key PK_codigoEmpleado(codigoEmpleado),
+    constraint FK_Empleados_CargoEmpleado foreign key (codigoCargoEmpleado) references CargoEmpleado(codigoCargoEmpleado)
+);
