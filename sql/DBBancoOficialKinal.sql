@@ -24,3 +24,12 @@ create table Clientes(
     primary key PK_codigoCliente(codigoCliente),
     constraint FK_Clientes_TipoCuenta foreign key(codigoTipoCuenta) references TipoCuenta(codigoTipoCuenta)
 );
+
+create table CargoEmpleado(
+	codigoCargoEmpleado int not null auto_increment,
+    nombreCargo varchar(50) not null,
+    descripcion text,
+    salarioBase decimal(10,2) default 0.00,
+    nivelJerarquico int,
+    primary key PK_codigoCargoEmpleado(codigoCargoEmpleado)
+);
