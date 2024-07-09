@@ -45,3 +45,14 @@ create table Empleados (
     primary key PK_codigoEmpleado(codigoEmpleado),
     constraint FK_Empleados_CargoEmpleado foreign key (codigoCargoEmpleado) references CargoEmpleado(codigoCargoEmpleado)
 );
+
+create table Sucursales (
+    codigoSucursal int not null auto_increment,
+    nombreSucursal varchar(100) not null,
+    direccionSucursal varchar(255),
+    telefono varchar(20),
+    correoSucursal varchar(20) not null,
+    codigoEmpleado int,
+    primary key PK_codigoSucursal(codigoSucursal),
+    constraint FK_Sucursales_Empleados foreign key (codigoEmpleado) references Empleados(codigoEmpleado)
+);
