@@ -67,3 +67,15 @@ create table Transaccion(
     primary key PK_codigoTransaccion(codigoTransaccion),
 	constraint FK_Transaccion_Clientes foreign key(codigoCliente) references Clientes(codigoCliente)
 );
+
+create table Prestamos (
+    codigoPrestamo int not null auto_increment,
+    monto decimal(10,2) not null,
+    tipoPrestamo varchar(50) not null, -- Personal, empresa, organisacion
+    tasaInteres decimal(5, 2) not null,	-- Trigger dependiendo el tipo de prestamo
+    fechaInicio date not null,
+    fechaVencimiento date not null,
+    codigoCliente int not null,
+    primary key PK_codigoPrestamo(codigoPrestamo),
+    constraint FK_Prestamos_Clientes foreign key(codigoCliente) references Clientes(codigoCliente)
+);
