@@ -87,11 +87,11 @@
                    </h1>
 
                    <div class="home__buttons">
-                      <a href="Login.html" class="button">
+                      <a href="http://localhost:8080/BancoOficialKinal/Controlador?menu=home" class="button">
                          Ingresa acá
                       </a>
 
-                      <a href="index.html" class="button__link">
+                      <a href="http://localhost:8080/BancoOficialKinal/Controlador?menu=home" class="button__link">
                          <i class="ri-play-circle-line"></i> Saber más
                       </a>
                    </div>
@@ -114,7 +114,7 @@
                       </h3>
 
                       <span class="home__info-subtitle">
-                         Happy <br> Customer
+                         Mejores <br> Clientes
                       </span>
                    </div>
 
@@ -418,12 +418,12 @@
              <p class="footer-contact">
                  <i class="ri-customer-service-line" style="width: 20px;"></i>
                  <strong>PBX:</strong>
-                 1717
+                 2387-7626
              </p>
              <p class="footer-address">
                  <i class="ri-map-pin-2-fill" style="width: 20px;"></i>
                  <strong>Dirección: </strong>
-                 Vía 5 5-35 Zona 4, Ciudad de Guatemala, Guatemala.
+                 6 avenida 13-54 zona 7, Colonia Landívar, 01007 Ciudad de Guatemala, Guatemala, C.A.
              </p>
          </div>
          <div class="social-icons">
