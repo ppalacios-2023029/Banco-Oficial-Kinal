@@ -38,6 +38,8 @@ create table Empleados (
     codigoEmpleado int not null auto_increment,
     nombreEmpleado varchar(50) not null,
     apellidoEmpleado varchar(50) not null,
+    usuario varchar(20) not null,
+    contrasena varchar(20) NOT NULL,
     cargo varchar(50) not null,
     salario DECIMAL(10, 2) NOT NULL,
     oficina VARCHAR(50) NOT NULL,
@@ -128,3 +130,7 @@ CREATE TABLE DetalleCuenta (
     constraint FK_DetalleCuenta_Empleados foreign key(codigoEmpleado) references Empleados(codigoEmpleado),
     constraint FK_DetalleCuenta_Sucursales foreign key(codigoSucursal) references Sucursales(codigoSucursal)
 );
+insert into CargoEmpleado(nombreCargo, descripcion, salarioBase, nivelJerarquico) values('Gerente','Dirige todo el Banco','12000.00',1);
+insert into Empleados(nombreEmpleado, apellidoEmpleado,usuario, contrasena, cargo, salario, oficina, codigoCargoEmpleado) values('nery','de la Cruz','neryd','1234','Gerente','12000.0','A-100',1);
+
+select * from Empleados where usuario='neryd' and contrasena = '1234';
