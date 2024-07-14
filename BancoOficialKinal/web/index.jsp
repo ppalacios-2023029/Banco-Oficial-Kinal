@@ -45,7 +45,7 @@
                         <a href="#"><img src="./img/Facebook.png" alt="Facebook"></a>
                     </div>
                     <div class="iconolinkedin">
-                        <a href="#"><img src="./img/Linkedin.png" alt="LinkedIn"></a>
+                        <a href="#"><img src="./img/LinkedIn.png" alt="LinkedIn"></a>
                     </div>
                     <div class="iconohub">
                         <a href="#"><img src="./img/Hub.png" alt="GitHub"></a>
