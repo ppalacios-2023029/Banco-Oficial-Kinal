@@ -1,19 +1,20 @@
 package modelo;
 
 public class Clientes {
-   private int codigoCliente;
-   private String nombreCliente;
-   private String apellidoCliente;
-   private String direccionCliente;
-   private String telefonoCliente;
-   private String correoCliente;
-   private String descripcion;
-   private int codigoTipoCuenta;
-
+    private int codigoCliente;
+    private String nombreCliente;
+    private String apellidoCliente;
+    private String direccionCliente;
+    private String telefonoCliente;
+    private String correoCliente;
+    private String descripcion;
+    private int codigoTipoCuenta;
+    private String estado;
+   
     public Clientes() {
     }
 
-    public Clientes(int codigoCliente, String nombreCliente, String apellidoCliente, String direccionCliente, String telefonoCliente, String correoCliente, String descripcion, int codigoTipoCuenta) {
+    public Clientes(int codigoCliente, String nombreCliente, String apellidoCliente, String direccionCliente, String telefonoCliente, String correoCliente, String descripcion, int codigoTipoCuenta, String estado) {
         this.codigoCliente = codigoCliente;
         this.nombreCliente = nombreCliente;
         this.apellidoCliente = apellidoCliente;
@@ -22,6 +23,7 @@ public class Clientes {
         this.correoCliente = correoCliente;
         this.descripcion = descripcion;
         this.codigoTipoCuenta = codigoTipoCuenta;
+        this.estado = estado;
     }
 
     public int getCodigoCliente() {

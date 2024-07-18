@@ -6,17 +6,19 @@ public class Sucursales {
     private String direccionSucursal;
     private String telefono;
     private String correoSucursal;
+    private String estado;
     private int codigoEmpleado;
 
     public Sucursales() {
     }
 
-    public Sucursales(int codigoSucursal, String nombreSucursal, String direccionSucursal, String telefono, String correoSucursal, int codigoEmpleado) {
+    public Sucursales(int codigoSucursal, String nombreSucursal, String direccionSucursal, String telefono, String correoSucursal, String estado, int codigoEmpleado) {
         this.codigoSucursal = codigoSucursal;
         this.nombreSucursal = nombreSucursal;
         this.direccionSucursal = direccionSucursal;
         this.telefono = telefono;
         this.correoSucursal = correoSucursal;
+        this.estado = estado;
         this.codigoEmpleado = codigoEmpleado;
     }
 
@@ -60,6 +62,14 @@ public class Sucursales {
         this.correoSucursal = correoSucursal;
     }
 
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+    
     public int getCodigoEmpleado() {
         return codigoEmpleado;
     }
@@ -67,6 +77,7 @@ public class Sucursales {
     public void setCodigoEmpleado(int codigoEmpleado) {
         this.codigoEmpleado = codigoEmpleado;
     }
+    
     
     
 }

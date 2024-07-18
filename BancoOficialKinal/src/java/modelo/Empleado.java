@@ -9,10 +9,26 @@ public class Empleado {
     private String cargo;
     private double salario;
     private String oficina;
+    private String estado;
     private int codigoCargoEmpleado;
 
     public Empleado() {
     }
+
+    public Empleado(int codigoEmpleado, String nombreEmpleado, String apellidoEmpleado, String usuario, String contrasena, String cargo, double salario, String oficina, String estado, int codigoCargoEmpleado) {
+        this.codigoEmpleado = codigoEmpleado;
+        this.nombreEmpleado = nombreEmpleado;
+        this.apellidoEmpleado = apellidoEmpleado;
+        this.usuario = usuario;
+        this.contrasena = contrasena;
+        this.cargo = cargo;
+        this.salario = salario;
+        this.oficina = oficina;
+        this.estado = estado;
+        this.codigoCargoEmpleado = codigoCargoEmpleado;
+    }
+    
+    
 
     public int getCodigoEmpleado() {
         return codigoEmpleado;
@@ -86,6 +102,14 @@ public class Empleado {
 
     public void setCodigoCargoEmpleado(int codigoCargoEmpleado) {
         this.codigoCargoEmpleado = codigoCargoEmpleado;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     
