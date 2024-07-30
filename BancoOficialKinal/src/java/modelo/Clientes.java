@@ -10,7 +10,7 @@ public class Clientes {
     private String descripcion;
     private int codigoTipoCuenta;
     private String estado;
-   
+
     public Clientes() {
     }
 
@@ -89,6 +89,14 @@ public class Clientes {
     public void setCodigoTipoCuenta(int codigoTipoCuenta) {
         this.codigoTipoCuenta = codigoTipoCuenta;
     }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
    
-   
+    
 }
