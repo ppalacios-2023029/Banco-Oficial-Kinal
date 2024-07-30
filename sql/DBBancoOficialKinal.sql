@@ -139,3 +139,8 @@ CREATE TABLE DetalleCuenta (
     constraint FK_DetalleCuenta_Empleados foreign key(codigoEmpleado) references Empleados(codigoEmpleado),
     constraint FK_DetalleCuenta_Sucursales foreign key(codigoSucursal) references Sucursales(codigoSucursal)
 );
+insert into CargoEmpleado(nombreCargo, descripcion, salarioBase, nivelJerarquico) values('Gerente','Dirige todo el Banco','12000.00',1);
+insert into Empleados(nombreEmpleado, apellidoEmpleado,usuario, contrasena, cargo, salario, oficina, codigoCargoEmpleado) values('nery','de la Cruz','neryd','1234','Gerente','12000.0','A-100',1);
+
+select * from Empleados where usuario='neryd' and contrasena = '1234';
+

@@ -2,7 +2,7 @@ package modelo;
 
 import java.util.Date;
 
-public class Targeta {
+public class Tarjeta {
     private String numeroTarjeta;
     private String tipoTarjeta;
     private String CVC;
@@ -12,10 +12,10 @@ public class Targeta {
     private String estado;
     private int codigoCliente;
 
-    public Targeta() {
+    public Tarjeta() {
     }
 
-    public Targeta(String numeroTarjeta, String tipoTarjeta, String CVC, Date fechaVencimiento, Date fechaEmision, double limiteDeCredito, String estado, int codigoCliente) {
+    public Tarjeta(String numeroTarjeta, String tipoTarjeta, String CVC, Date fechaVencimiento, Date fechaEmision, double limiteDeCredito, String estado, int codigoCliente) {
         this.numeroTarjeta = numeroTarjeta;
         this.tipoTarjeta = tipoTarjeta;
         this.CVC = CVC;
