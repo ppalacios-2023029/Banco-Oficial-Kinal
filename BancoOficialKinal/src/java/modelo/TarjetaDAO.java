@@ -9,9 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TarjetaDAO {
+    Conexion cn = new Conexion();
     Connection con;
     PreparedStatement ps;
-    ResultSet rs;    Conexion cn = new Conexion();
+    ResultSet rs;    
     int resp;
     
     //Métodos del CRUD
@@ -42,7 +43,7 @@ public class TarjetaDAO {
     }
     
     public int agregar(Tarjeta trj){
-        String sql = "insert into Tarjetas (numeroTarjeta,tipoTarjeta,CVC,fechaVencimiento,fechaEmision,limiteDeCredito,estado,codigoCliente) values ('?','?','?','?','?','?','?','?')";
+        String sql = "insert into Tarjetas (numeroTarjeta, tipoTarjeta, CVC, fechaVencimiento, fechaEmision, limiteDeCredito, estado, codigoCliente) values (?, ?, ?, ?, ?, ?, ?, ?)";
         try{
             con = cn.Conexion();
             ps = con.prepareStatement(sql);
@@ -54,7 +55,7 @@ public class TarjetaDAO {
             ps.setDouble(6, trj.getLimiteDeCredito());
             ps.setString(7, trj.getEstado());
             ps.setInt(8, trj.getCodigoCliente());
-            ps.executeQuery();
+            ps.executeUpdate();
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -103,7 +104,7 @@ public class TarjetaDAO {
             ps.setDouble(6, trj.getLimiteDeCredito());
             ps.setString(7, trj.getEstado());
             ps.setInt(8, trj.getCodigoCliente());
-            ps.executeQuery();            
+            ps.executeUpdate();            
         }catch(Exception e){
             e.printStackTrace();
         }
