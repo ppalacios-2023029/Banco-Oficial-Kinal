@@ -2,7 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
         <group>
             <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/src/java/modelo/Prestamos.java</file>
             <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/src/java/modelo/Tarjeta.java</file>
@@ -33,6 +32,20 @@
             <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/web/Empleado.jsp</file>
             <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/src/java/modelo/Empleado.java</file>
             <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/src/java/controlador/Validar.java</file>
+        </group>
+        <group>
+            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/web/System.jsp</file>
+            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/src/java/controlador/Controlador.java</file>
+            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/src/java/modelo/CargoEmpleado.java</file>
+            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/src/java/modelo/EmpleadoDAO.java</file>
+            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/src/java/modelo/CargoEmpleadoDAO.java</file>
+            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/web/css/system.css</file>
+            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/web/home.jsp</file>
+            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/web/assets/css/Gerencia.css</file>
+            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/src/java/modelo/Empleado.java</file>
+            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/web/Empleado.jsp</file>
+            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/src/java/controlador/Validar.java</file>
+            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/web/assets/js/scripts.js</file>
         </group>
     </open-files>
 </project-private>
