@@ -27,8 +27,6 @@ public class Empleado {
         this.estado = estado;
         this.codigoCargoEmpleado = codigoCargoEmpleado;
     }
-    
-    
 
     public int getCodigoEmpleado() {
         return codigoEmpleado;
@@ -61,9 +59,7 @@ public class Empleado {
     public void setUsuario(String usuario) {
         this.usuario = usuario;
     }
-    
-    
-    
+
     public String getContrasena() {
         return contrasena;
     }
@@ -96,14 +92,6 @@ public class Empleado {
         this.oficina = oficina;
     }
 
-    public int getCodigoCargoEmpleado() {
-        return codigoCargoEmpleado;
-    }
-
-    public void setCodigoCargoEmpleado(int codigoCargoEmpleado) {
-        this.codigoCargoEmpleado = codigoCargoEmpleado;
-    }
-
     public String getEstado() {
         return estado;
     }
@@ -111,6 +99,20 @@ public class Empleado {
     public void setEstado(String estado) {
         this.estado = estado;
     }
+
+    public int getCodigoCargoEmpleado() {
+        return codigoCargoEmpleado;
+    }
+
+    public void setCodigoCargoEmpleado(int codigoCargoEmpleado) {
+        this.codigoCargoEmpleado = codigoCargoEmpleado;
+    }
+    
+    
+
+    
+    
+    
 
     
     
