@@ -7,20 +7,19 @@ public class PagoPrestamo {
     private double monto;
     private Date fechaInicio;
     private Date fechaVencimiento;
-    private int codigoPrestamo;
     private String estado;
+    private int codigoPrestamo;
 
     public PagoPrestamo() {
     }
-    
 
-    public PagoPrestamo(int codigoPagos, double monto, Date fechaInicio, Date fechaVencimiento, String estadoPago, int codigoPrestamo, String estado) {
+    public PagoPrestamo(int codigoPagos, double monto, Date fechaInicio, Date fechaVencimiento, String estado, int codigoPrestamo) {
         this.codigoPagos = codigoPagos;
         this.monto = monto;
         this.fechaInicio = fechaInicio;
         this.fechaVencimiento = fechaVencimiento;
-        this.codigoPrestamo = codigoPrestamo;
         this.estado = estado;
+        this.codigoPrestamo = codigoPrestamo;
     }
 
     public int getCodigoPagos() {
