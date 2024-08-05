@@ -18,6 +18,8 @@ import modelo.EmpleadoDAO;
 import modelo.Prestamos;
 import modelo.PrestamosDAO;
 import modelo.CargoEmpleadoDAO;
+import modelo.TipoCuenta;
+import modelo.TipoCuentaDAO;
 /**
  *
  * @author neryd
@@ -26,6 +28,15 @@ public class Controlador extends HttpServlet {
     Empleado empleado = new Empleado();
     EmpleadoDAO empleadoDAO = new EmpleadoDAO();
     CargoEmpleadoDAO cargoEmpleadoDAO = new CargoEmpleadoDAO();
+    // -- Cambios de Tipo Cuenta --
+    TipoCuenta tipoCuenta = new TipoCuenta();
+    TipoCuentaDAO tipoCuentaDAO = new TipoCuentaDAO();
+    double saldoMin;
+    double interes;
+    double impuestos;
+    int codigoTipoCuenta;
+    List listaTipoC;
+    // ----------------------------
     Prestamos prestamos = new Prestamos();
     PrestamosDAO prestamosDAO = new PrestamosDAO();
     int codigoCargoEmpleado;
@@ -181,8 +192,65 @@ public class Controlador extends HttpServlet {
             }
             
             request.getRequestDispatcher("Empleado.jsp").forward(request, response);
-        }else if (menu.equals("Cliente")){
-            request.getRequestDispatcher("Cliente.jsp").forward(request, response);
+        // ------------------------- Cambios de Tipo cuenta -------------------------
+        }else if (menu.equals("TipoCuenta")){
+            switch(accion){
+                case "Listar":
+                    List listaTipoCuenta = tipoCuentaDAO.listar();
+                    request.setAttribute("tipoCuentas", listaTipoCuenta);
+                break;
+                case "Agregar":
+                    String tipoC = request.getParameter("txtTipoCuenta");
+                    saldoMin = Double.parseDouble(request.getParameter("txtSaldoMinimoRequerido"));
+                    interes = Double.parseDouble(request.getParameter("txtTazaDeInteres"));
+                    impuestos = Double.parseDouble(request.getParameter("txtTazaDeImpuestos"));
+                    String estado = (request.getParameter("txtEstado"));
+                    tipoCuenta.setTipoCuenta(tipoC);
+                    tipoCuenta.setSaldoMinimoRequerido(saldoMin);
+                    tipoCuenta.setTazaDeInteres(interes);
+                    tipoCuenta.setTazaDeImpuestos(impuestos);
+                    tipoCuenta.setEstado(estado);
+                    tipoCuentaDAO.agregar(tipoCuenta);
+                    request.getRequestDispatcher("Controlador?menu=TipoCuenta&accion=Listar").forward(request, response);
+                break;
+                case "Editar":
+                    codigoTipoCuenta = Integer.parseInt(request.getParameter("codigoTipoCuenta"));
+                    TipoCuenta tpc = tipoCuentaDAO.listarCodigoTipoCuenta(codigoTipoCuenta);
+                    request.setAttribute("tipoCuenta", tpc);
+                    request.getRequestDispatcher("Controlador?menu=TipoCuenta&accion=Listar").forward(request, response);
+                break;
+                case "Actualizar":
+                    String tc = request.getParameter("txtTipoCuenta");
+                    saldoMin = Double.parseDouble(request.getParameter("txtSaldoMinimoRequerido"));
+                    interes = Double.parseDouble(request.getParameter("txtTazaDeInteres"));
+                    impuestos = Double.parseDouble(request.getParameter("txtTazaDeImpuestos"));
+                    String est = (request.getParameter("txtEstado"));
+                    tipoCuenta.setTipoCuenta(tc);
+                    tipoCuenta.setSaldoMinimoRequerido(saldoMin);
+                    tipoCuenta.setTazaDeInteres(interes);
+                    tipoCuenta.setTazaDeImpuestos(impuestos);
+                    tipoCuenta.setEstado(est);
+                    tipoCuenta.setCodigoTipoCuenta(codigoTipoCuenta);
+                    tipoCuentaDAO.actualizar(tipoCuenta);
+                    request.getRequestDispatcher("Controlador?menu=TipoCuenta&accion=Listar").forward(request, response);
+                break;
+                case "Eliminar":
+                    codigoTipoCuenta = Integer.parseInt(request.getParameter("codigoTipoCuenta"));
+                    tipoCuentaDAO.eliminar(codigoTipoCuenta);
+                    request.getRequestDispatcher("Controlador?menu=TipoCuenta&accion=Listar").forward(request, response);
+                break;
+     
+                /*case "Buscar":
+                    barraBuscar = request.getParameter("txtBuscar");
+                    listaTipoC = tipoCuentaDAO.barraBusqueda(barraBuscar);
+                    request.setAttribute("tipoCuentas", listaTipoC);
+                break;*/
+                case "Cancelar":
+                    request.getRequestDispatcher("Controlador?menu=TipoCuenta&accion=Listar").forward(request, response);
+                break;
+            }
+            request.getRequestDispatcher("TipoCuenta.jsp").forward(request, response);
+        // ---------------------------------------------------------------------------
         }else if (menu.equals("Producto")){
             request.getRequestDispatcher("Producto.jsp").forward(request, response);
         }else if (menu.equals("NuevaVenta")){

@@ -83,7 +83,7 @@
             <span><a href="#">Seguros</a></span>
             <span><a href="#">Targetas</a></span>
             <span><a href="#">Transacciones</a></span>
-            <span><a href="#">Tipos de Cuentas</a></span>
+            <span><a href="Controlador?menu=TipoCuenta&accion=Listar">Tipos de Cuentas</a></span>
           </ul>
         </li>
         
