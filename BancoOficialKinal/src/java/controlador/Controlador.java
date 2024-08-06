@@ -15,8 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modelo.Empleado;
 import modelo.EmpleadoDAO;
-import modelo.Prestamos;
-import modelo.PrestamosDAO;
+import modelo.Prestamo;
+import modelo.PrestamoDAO;
 import modelo.CargoEmpleadoDAO;
 import modelo.TipoCuenta;
 import modelo.TipoCuentaDAO;
@@ -30,8 +30,9 @@ public class Controlador extends HttpServlet {
     Empleado empleado = new Empleado();
     EmpleadoDAO empleadoDAO = new EmpleadoDAO();
     CargoEmpleadoDAO cargoEmpleadoDAO = new CargoEmpleadoDAO();
-    Prestamos prestamos = new Prestamos();
-    PrestamosDAO prestamosDAO = new PrestamosDAO();
+    
+    Prestamo prestamos = new Prestamo();
+    PrestamoDAO prestamosDAO = new PrestamoDAO();
     
     TipoCuenta tipoCuenta = new TipoCuenta();
     TipoCuentaDAO tipoCuentaDAO = new TipoCuentaDAO();
@@ -140,13 +141,17 @@ public class Controlador extends HttpServlet {
                 break;
             }
             request.getRequestDispatcher("Empleado.jsp").forward(request,response);
+            
+        //PRESTAMO
         }else if (menu.equals("Prestamo")){
             
             switch(accion){
                 case "Listar":
                     List listaPrestamo = prestamosDAO.listar();
-                    request.setAttribute("Prestamos", listaPrestamo);
-                    break;
+                    List listaClientes = clietneDao.listar();
+                    request.setAttribute("prestamos", listaPrestamo);
+                    request.setAttribute("clientes", listaClientes);
+                break;
                 case "Agregar":
                     String monto = request.getParameter("txtMonto");
                     String tPrestamo = request.getParameter("txtTipoPrestamo");
@@ -154,21 +159,25 @@ public class Controlador extends HttpServlet {
                     String fechaInicio = request.getParameter("txtFechaInicio");
                     String fechaVencimiento = request.getParameter("txtFechaVencimiento");
                     String estado = request.getParameter("txtEstado");
+                    codCli = Integer.parseInt(request.getParameter("ddlCliente"));
                     prestamos.setMonto(Double.parseDouble(monto));
                     prestamos.setTipoPrestamo(tPrestamo);
                     prestamos.setTasaInteres(Double.parseDouble(tasaInteres));
-                    //prestamos.setFechaInicio(new java.sql.Date(fechaInicio));
-                    //prestamos.setFechaVencimiento(fechaVencimiento);
+                    prestamos.setFechaInicio(fechaInicio);
+                    prestamos.setFechaVencimiento(fechaVencimiento);
                     prestamos.setEstado(estado);
+                    prestamos.setCodigoCliente(codCli);
                     prestamosDAO.agregar(prestamos);
-                    request.getRequestDispatcher("Controlador?menu=Empleado&accion=Listar").forward(request, response);
-                    break;
+                    request.getRequestDispatcher("Controlador?menu=Prestamo&accion=Listar").forward(request, response);
+                break;
+                
                 case "Editar":
-                    codPrestamos = Integer.parseInt(request.getParameter("codigoPretamo"));
-                    Prestamos e = prestamosDAO.listarPrestamos(codPrestamos);
-                    request.setAttribute("empleado", e);
-                    request.getRequestDispatcher("Controlador?menu=Empleado&accion=Listar").forward(request, response);
-                    break;
+                    codPrestamos = Integer.parseInt(request.getParameter("codigoPrestamo"));
+                    Prestamo e = prestamosDAO.listarPrestamos(codPrestamos);
+                    request.setAttribute("prestamo", e);
+                    request.getRequestDispatcher("Controlador?menu=Prestamo&accion=Listar").forward(request, response);
+                break;
+                
                 case "Actualizar":
                     String mont = request.getParameter("txtMonto");
                     String tPrest = request.getParameter("txtTipoPrestamo");
@@ -179,20 +188,26 @@ public class Controlador extends HttpServlet {
                     prestamos.setMonto(Double.parseDouble(mont));
                     prestamos.setTipoPrestamo(tPrest);
                     prestamos.setTasaInteres(Double.parseDouble(tInteres));
-                    //prestamos.setFechaInicio(new java.sql.Date(fechaIni));
-                    //prestamos.setFechaVencimiento(fechaVen);
+                    prestamos.setFechaInicio(fechaIni);
+                    prestamos.setFechaVencimiento(fechaVen);
                     prestamos.setEstado(estad);
-                    prestamosDAO.agregar(prestamos);
-                    request.getRequestDispatcher("Controlador?menu=Empleado&accion=Listar").forward(request, response);
-                    break;
+                    prestamos.setCodigoPrestamo(codPrestamos);
+                    prestamosDAO.actualizar(prestamos);
+                    request.getRequestDispatcher("Controlador?menu=Prestamo&accion=Listar").forward(request, response);
+                break;
+                
                 case "Eliminar":
                     codPrestamos = Integer.parseInt(request.getParameter("codigoPrestamo"));
                     prestamosDAO.eliminar(codPrestamos);
-                    request.getRequestDispatcher("Controlador?menu=Empleado&accion=Listar").forward(request, response);
-                    break;
+                    request.getRequestDispatcher("Controlador?menu=Prestamo&accion=Listar").forward(request, response);
+                break;
+                
+                case "Cancelar":
+                    request.getRequestDispatcher("Controlador?menu=Prestamo&accion=Listar").forward(request, response);
+                break;
             }
             
-            request.getRequestDispatcher("Empleado.jsp").forward(request, response);
+            request.getRequestDispatcher("Prestamo.jsp").forward(request, response);
             
             //Cliente
             
