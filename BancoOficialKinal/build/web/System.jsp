@@ -108,7 +108,7 @@
           <ul class="sub-menu">
             <span><a class="link_name" href="#">Seguro</a></span>
             <span><a href="#">Sucursales</a></span>
-            <span><a href="#">Cargos</a></span>
+            <span><a aria-current="page" href="Controlador?menu=CargoEmpleado&accion=Listar" target="myFrame">Cargos</a></span>
             <span><a href="#">Dribbble</a></span>
           </ul>
         </li>
