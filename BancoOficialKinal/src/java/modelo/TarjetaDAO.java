@@ -62,14 +62,37 @@ public class TarjetaDAO {
         return resp;
     }
     
-    public Tarjeta listarNumeroTarjeta(String id){
+//    public Tarjeta listarNumeroTarjeta(String id){
+//        Tarjeta trj = new Tarjeta();
+//        String sql = "Select * from Tarjetas where numeroTarjeta = "+id;
+//        try{
+//            con = cn.Conexion();
+//            ps = con.prepareStatement(sql);
+//            rs = ps.executeQuery();
+//            while (rs.next()){
+//                trj.setNumeroTarjeta(rs.getString(1));
+//                trj.setTipoTarjeta(rs.getString(2));
+//                trj.setCVC(rs.getString(3));
+//                trj.setFechaVencimiento(rs.getDate(4));
+//                trj.setFechaEmision(rs.getDate(5));
+//                trj.setLimiteDeCredito(rs.getDouble(6));
+//                trj.setEstado(rs.getString(7));
+//                trj.setCodigoCliente(rs.getInt(8));
+//            }
+//        }catch(Exception e){
+//            e.printStackTrace();
+//        }
+//        return trj;
+//    }
+    public Tarjeta listarNumeroTarjeta(String id) {
         Tarjeta trj = new Tarjeta();
-        String sql = "Select * from Tarjetas where numeroTarjeta = "+id;
-        try{
+        String sql = "SELECT * FROM Tarjetas WHERE numeroTarjeta = ?";
+        try {
             con = cn.Conexion();
             ps = con.prepareStatement(sql);
+            ps.setString(1, id);
             rs = ps.executeQuery();
-            while (rs.next()){
+            while (rs.next()) {
                 trj.setNumeroTarjeta(rs.getString(1));
                 trj.setTipoTarjeta(rs.getString(2));
                 trj.setCVC(rs.getString(3));
@@ -79,11 +102,13 @@ public class TarjetaDAO {
                 trj.setEstado(rs.getString(7));
                 trj.setCodigoCliente(rs.getInt(8));
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return trj;
     }
+
+
     
     public int actualizar (Tarjeta trj){
         String sql = "Update Tarjetas set tipoTarjeta = ?,"

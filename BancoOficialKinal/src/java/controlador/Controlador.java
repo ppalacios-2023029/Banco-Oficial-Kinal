@@ -7,6 +7,7 @@ package controlador;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -22,6 +23,8 @@ import modelo.TipoCuenta;
 import modelo.TipoCuentaDAO;
 import modelo.Clientes;
 import modelo.ClienteDAO;
+import modelo.Tarjeta;
+import modelo.TarjetaDAO;
 /**
  *
  * @author neryd
@@ -38,6 +41,9 @@ public class Controlador extends HttpServlet {
     
     Clientes cliente = new Clientes();
     ClienteDAO clietneDao = new ClienteDAO();
+    
+    TarjetaDAO tarjetaDAO = new TarjetaDAO();
+    Tarjeta tarjeta = new Tarjeta();
     
     int codCli;
     int codigoCargoEmpleado;
@@ -223,6 +229,104 @@ public class Controlador extends HttpServlet {
                 break;
             }
             request.getRequestDispatcher("Cliente.jsp").forward(request, response);
+        }else if (menu.equals("Tarjeta")) {
+            switch (accion) {
+                case "Listar":
+                    List<Tarjeta> listaTarjeta = tarjetaDAO.listar();
+                    request.setAttribute("tarjetas", listaTarjeta);
+                    break;
+
+                case "Agregar":
+                    try {
+                        String numeroTarjeta = request.getParameter("txtNumeroTarjeta");
+                        String tipoTarjeta = request.getParameter("txtTipoTarjeta");
+                        String CVC = request.getParameter("txtCVC");
+                        String fechaVencimiento = request.getParameter("txtFechaVencimiento");
+                        String fechaEmision = request.getParameter("txtFechaEmision");
+                        double limiteDeCredito = Double.parseDouble(request.getParameter("txtLimiteDeCredito"));
+                        String estado = request.getParameter("txtEstado");
+                        int codigoCliente = Integer.parseInt(request.getParameter("ddlCodigoCliente"));
+
+                        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                        Date parsedFechaVencimiento = format.parse(fechaVencimiento);
+                        Date parsedFechaEmision = format.parse(fechaEmision);
+
+                        Tarjeta tarjeta = new Tarjeta();
+                        tarjeta.setNumeroTarjeta(numeroTarjeta);
+                        tarjeta.setTipoTarjeta(tipoTarjeta);
+                        tarjeta.setCVC(CVC);
+                        tarjeta.setFechaVencimiento(new java.sql.Date(parsedFechaVencimiento.getTime()));
+                        tarjeta.setFechaEmision(new java.sql.Date(parsedFechaEmision.getTime()));
+                        tarjeta.setLimiteDeCredito(limiteDeCredito);
+                        tarjeta.setEstado(estado);
+                        tarjeta.setCodigoCliente(codigoCliente);
+
+                        tarjetaDAO.agregar(tarjeta);
+                        request.getRequestDispatcher("Controlador?menu=Tarjeta&accion=Listar").forward(request, response);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    break;
+
+                case "Editar":
+                    String numeroTarjetaEditar = request.getParameter("numeroTarjeta");
+                    Tarjeta tr = tarjetaDAO.listarNumeroTarjeta(numeroTarjetaEditar);
+                    request.setAttribute("tarjeta", tr);
+                    request.getRequestDispatcher("Controlador?menu=Tarjeta&accion=Listar").forward(request, response);
+                    break;
+
+                case "Actualizar":
+                    try {
+                        String numeroTarjetaAct = request.getParameter("txtNumeroTarjeta");
+                        String tipoTar = request.getParameter("txtTipoTarjeta");
+                        String cvc = request.getParameter("txtCVC");
+                        String fechaVen = request.getParameter("txtFechaVencimiento");
+                        String fechaEmi = request.getParameter("txtFechaEmision");
+                        double limiteCred = Double.parseDouble(request.getParameter("txtLimiteDeCredito"));
+                        String est = request.getParameter("txtEstado");
+                        int codigoClienteAct = Integer.parseInt(request.getParameter("ddlCodigoCliente"));
+
+                        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                        Date parsedFechaVencimiento = format.parse(fechaVen);
+                        Date parsedFechaEmision = format.parse(fechaEmi);
+
+                        Tarjeta tarjeta = new Tarjeta();
+                        tarjeta.setNumeroTarjeta(numeroTarjetaAct);
+                        tarjeta.setTipoTarjeta(tipoTar);
+                        tarjeta.setCVC(cvc);
+                        tarjeta.setFechaVencimiento(new java.sql.Date(parsedFechaVencimiento.getTime()));
+                        tarjeta.setFechaEmision(new java.sql.Date(parsedFechaEmision.getTime()));
+                        tarjeta.setLimiteDeCredito(limiteCred);
+                        tarjeta.setEstado(est);
+                        tarjeta.setCodigoCliente(codigoClienteAct);
+
+                        tarjetaDAO.actualizar(tarjeta);
+                        request.getRequestDispatcher("Controlador?menu=Tarjeta&accion=Listar").forward(request, response);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    break;
+
+                case "Eliminar":
+                    String numTarjetaEliminar = request.getParameter("numeroTarjeta");
+                    tarjetaDAO.eliminar(numTarjetaEliminar);
+                    request.getRequestDispatcher("Controlador?menu=Tarjeta&accion=Listar").forward(request, response);
+                    break;
+
+                case "Buscar":
+                    String barraBuscarTarjeta = request.getParameter("txtBuscar");
+                    Tarjeta tarjetaBuscada = tarjetaDAO.listarNumeroTarjeta(barraBuscarTarjeta);
+                    request.setAttribute("tarjeta", tarjetaBuscada);
+                    break;
+
+                case "Cancelar":
+                    request.getRequestDispatcher("Controlador?menu=Tarjeta&accion=Listar").forward(request, response);
+                    break;
+
+                default:
+                    throw new ServletException("Accion no reconocida");
+            }
+            request.getRequestDispatcher("Tarjeta.jsp").forward(request, response);
         }else if (menu.equals("Producto")){
             request.getRequestDispatcher("Producto.jsp").forward(request, response);
         }else if (menu.equals("NuevaVenta")){
