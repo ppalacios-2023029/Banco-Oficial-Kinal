@@ -56,6 +56,7 @@ public class Controlador extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         String menu = request.getParameter("menu");
         String accion = request.getParameter("accion");
         
@@ -92,7 +93,6 @@ public class Controlador extends HttpServlet {
                     empleado.setCodigoCargoEmpleado(codigoCargoEmpleado);
                     empleadoDAO.agregar(empleado);
                     request.getRequestDispatcher("Controlador?menu=Empleado&accion=Listar").forward(request, response);
-                    
                 break;
                 case "Editar":
                     codigoEmpleado = Integer.parseInt(request.getParameter("codigoEmpleado"));

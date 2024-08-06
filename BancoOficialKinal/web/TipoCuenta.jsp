@@ -92,8 +92,8 @@
                                 <p class="TituloAgregar__subtitulos2">Estado</p>
                                 <select class="sl-foreign" name="txtEstado">
                                     <option selected>Elija una opción</option>
-                                    <option value="A" ${tipoCuenta.getEstado() == '1' ? 'selected' : ''}>Activo</option>
-                                    <option value="I" ${tipoCuenta.getEstado() == '0' ? 'selected' : ''}>Inactivo</option>
+                                    <option value="A" ${tipoCuenta.getEstado() == 'A' ? 'selected' : ''}>Activo</option>
+                                    <option value="I" ${tipoCuenta.getEstado() == 'I' ? 'selected' : ''}>Inactivo</option>
                                 </select>
                             </div>
                         </div>

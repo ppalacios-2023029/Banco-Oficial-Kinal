@@ -111,7 +111,7 @@
                             <div class="form-group">
                                 <p class="TituloAgregar__subtitulos2">Estado</p>
                                 <select class="sl-foreign" name="txtEstado">
-                                    <option selected>Elija una opción</option>
+                                    <option >Elija una opción</option>
                                     <option value="1" ${empleado.getEstado() == '1' ? 'selected' : ''}>Activo</option>
                                     <option value="0" ${empleado.getEstado() == '0' ? 'selected' : ''}>Inactivo</option>
                                 </select>
