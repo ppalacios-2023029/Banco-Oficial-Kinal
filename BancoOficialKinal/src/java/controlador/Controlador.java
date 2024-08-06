@@ -18,6 +18,10 @@ import modelo.EmpleadoDAO;
 import modelo.Prestamos;
 import modelo.PrestamosDAO;
 import modelo.CargoEmpleadoDAO;
+import modelo.TipoCuenta;
+import modelo.TipoCuentaDAO;
+import modelo.Clientes;
+import modelo.ClienteDAO;
 /**
  *
  * @author neryd
@@ -28,6 +32,14 @@ public class Controlador extends HttpServlet {
     CargoEmpleadoDAO cargoEmpleadoDAO = new CargoEmpleadoDAO();
     Prestamos prestamos = new Prestamos();
     PrestamosDAO prestamosDAO = new PrestamosDAO();
+    
+    TipoCuenta tipoCuenta = new TipoCuenta();
+    TipoCuentaDAO tipoCuentaDAO = new TipoCuentaDAO();
+    
+    Clientes cliente = new Clientes();
+    ClienteDAO clietneDao = new ClienteDAO();
+    
+    int codCli;
     int codigoCargoEmpleado;
     double salario;
     int codigoEmpleado;
@@ -181,7 +193,35 @@ public class Controlador extends HttpServlet {
             }
             
             request.getRequestDispatcher("Empleado.jsp").forward(request, response);
+            
+            //Cliente
+            
         }else if (menu.equals("Cliente")){
+            switch (accion) {
+                case "Listar":
+                    List listaClientes = clietneDao.listar();
+                    List listaTipoCuenta = tipoCuentaDAO.listar();
+                    request.setAttribute("clientes", listaClientes);
+                    request.setAttribute("tipoCuentas", listaTipoCuenta);
+                break;
+
+                case "Agregar":
+                    
+                break;
+
+                case "Editar":
+                    codCli = Integer.parseInt(request.getParameter("codigoCliente"));
+                    Clientes cl = clietneDao.listaCodigoClientes(codCli);
+                    request.setAttribute ("empleado", cl) ;
+                    request.getRequestDispatcher ("Controlador?menu=Empleado&accion=Listar") . forward(request, response);
+                break;
+
+                case "Actualizar":
+                break;
+
+                case "Eliminar":
+                break;
+            }
             request.getRequestDispatcher("Cliente.jsp").forward(request, response);
         }else if (menu.equals("Producto")){
             request.getRequestDispatcher("Producto.jsp").forward(request, response);

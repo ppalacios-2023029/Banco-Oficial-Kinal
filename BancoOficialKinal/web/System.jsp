@@ -51,14 +51,16 @@
         </li>
 
         <li id="aperturaCuenta">
-          <a aria-current="page" href="Controlador?menu=Empleado&accion=Listar" target="myFrame">
+          <a href="Controlador?menu=Cliente&accion=Listar" target="myframe">
             <i class="ri-account-circle-fill"></i>
             <span class="link_name">Apertura de cuenta</span>
           </a>
           <div class="sub-menu blank">
-            <span><a class="link_name" href="#">Apertura de cuenta</a></span>
+            <span><a class="link_name" href="Controlador?menu=Cliente&accion=Listar" target="myframe">Apertura de cuenta</a></span>
           </div>
         </li>
+        
+        
 
         <li id="prestamoNuevo">
           <a aria-current="page" href="Controlador?menu=Empleado&accion=Listar" target="myFrame">
@@ -170,7 +172,7 @@
 
     <div class="iframe-container">
         
-      <iframe name="myFrame" style="height: 100%; width: 100%; "></iframe>
+      <iframe name="myFrame"></iframe>
   </div>
   
 </section>
