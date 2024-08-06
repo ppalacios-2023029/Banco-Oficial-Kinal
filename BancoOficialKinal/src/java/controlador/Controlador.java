@@ -22,6 +22,7 @@ import modelo.EmpleadoDAO;
 import modelo.Prestamos;
 import modelo.PrestamosDAO;
 import modelo.CargoEmpleadoDAO;
+import modelo.Carrito;
 import modelo.NuevaTarjeta;
 import modelo.NuevaTarjetaDAO;
 /**
@@ -45,6 +46,10 @@ public class Controlador extends HttpServlet {
     String barraBuscar;
     List listaEmp;
     List<NuevaTarjeta> listaNuevaTarjeta = new ArrayList<>();
+    List<Carrito> listaCarrito = new ArrayList<>();
+    int item;
+    double totalPagar = 0.0;
+    int cantidad = 1;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -70,8 +75,10 @@ public class Controlador extends HttpServlet {
                     request.setAttribute("listaNuevaTarjeta", lista);
                     
                 break;
-                case "ejemplo":
+                case "AgregarCarrito":
+                    int idp=Integer.parseInt(request.getParameter("id"));
                 break;
+                
                 case "Guardar":
                     String titulo = request.getParameter("txtTitulo");
                     Part part = request.getPart("imagen");
@@ -96,7 +103,23 @@ public class Controlador extends HttpServlet {
                     request.setAttribute("listaNuevaTarjeta", lista);
                     
                 break;
-                case "ejemplo":
+                case "AgregarCarrito":
+                     int idp=Integer.parseInt(request.getParameter("id"));
+                     nt = ntDAO.listarId(idp);
+                     item = item+1;
+                     Carrito car = new Carrito();
+                     car.setItem(item);
+                     car.setIdNuevaTargeta(nt.getCodigoNuevaTarjeta());
+                     car.setTitulo(nt.getTitulo());
+                     car.setDescripcion(nt.getDescripcion());
+                     car.setMonto(nt.getMonto());
+                     car.setCantidad(cantidad);
+                     car.setSubTotal(cantidad*nt.getMonto());
+                     listaCarrito.add(car);
+                     request.setAttribute("contador", listaCarrito.size());
+                     request.getRequestDispatcher("Controlador?accion=BancoTarjetas").forward(request, response);                   
+                break;
+                case "Carrito":
                 break;
                 case "Guardar":
                     String titulo = request.getParameter("txtTitulo");

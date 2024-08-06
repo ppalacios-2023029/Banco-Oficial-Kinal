@@ -18,6 +18,26 @@ public class NuevaTarjetaDAO {
     PreparedStatement ps;
     ResultSet rs;
     
+    public NuevaTarjeta listarId(int id){
+        String sql = "Select * from ProductoTarjeta where codigoProductoTarjeta="+id;
+        NuevaTarjeta nuevaTarjeta = new NuevaTarjeta();
+        try{
+            con = cn.Conexion();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                nuevaTarjeta.setCodigoNuevaTarjeta(rs.getInt(1));
+                nuevaTarjeta.setTitulo(rs.getString(2));;
+                nuevaTarjeta.setImagen(rs.getBinaryStream(3));
+                nuevaTarjeta.setDescripcion(rs.getString(4));;
+                nuevaTarjeta.setMonto(rs.getDouble(5));
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return nuevaTarjeta;
+    }
+    
     public List listar(){
         List<NuevaTarjeta> listaTarjetas = new ArrayList<>();
         String sql = "Select * from ProductoTarjeta";
