@@ -1,4 +1,5 @@
 /*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -208,7 +209,7 @@ public class Controlador extends HttpServlet {
                 case "Editar":
                     codigoCargoEmpleado = Integer.parseInt(request.getParameter("codigoCargoEmpleado"));
                     CargoEmpleado em = cargoEmpleadoDAO.listarCodigoCargoEmpleado(codigoCargoEmpleado);
-                    request.setAttribute("cargoempleado", em);
+                    request.setAttribute("Cargoempleado", em);
                     request.getRequestDispatcher("Controlador?menu=CargoEmpleado&accion=Listar").forward(request, response);
                     break;
                 case "Actualizar":
@@ -222,7 +223,8 @@ public class Controlador extends HttpServlet {
                     cargoempleado.setSalarioBase(Double.parseDouble(salBase));
                     cargoempleado.setNivelJerarquico(Integer.parseInt(nivJerarquico));
                     cargoempleado.setEstado(est);
-                    cargoEmpleadoDAO.agregar(cargoempleado);
+                    cargoempleado.setCodigoCargoEmpleado(codigoCargoEmpleado);
+                    cargoEmpleadoDAO.actualizar(cargoempleado);
                     request.getRequestDispatcher("Controlador?menu=CargoEmpleado&accion=Listar").forward(request, response);
                     break;
                 case "Eliminar":
@@ -235,6 +237,7 @@ public class Controlador extends HttpServlet {
                     listCargoEmpleado = cargoEmpleadoDAO.barraBusqueda(barraBuscar);
                     request.setAttribute("CargoEmpleado", listCargoEmpleado);
                 break;
+
                 case "Cancelar":
                     request.getRequestDispatcher("Controlador?menu=CargoEmpleado&accion=Listar").forward(request, response);
                 break;

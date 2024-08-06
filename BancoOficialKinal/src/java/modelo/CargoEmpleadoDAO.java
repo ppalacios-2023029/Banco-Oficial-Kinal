@@ -24,27 +24,28 @@ public class CargoEmpleadoDAO {
     int resp;
 
     public List listar() {
-        String sql = "Select * from CargoEmpleado";
-        List<CargoEmpleado> listaCargoEmpleado = new ArrayList<>();
-        try {
-            con= cn.Conexion();
-            ps = con.prepareStatement(sql);
-            rs = ps.executeQuery();
-            while(rs.next()){
-                CargoEmpleado cm = new CargoEmpleado();
-                cm.setCodigoCargoEmpleado(rs.getInt(1));
-                cm.setNombreCargo(rs.getString(2));
-                cm.setDescripcion(rs.getString(3));
-                cm.setSalarioBase(rs.getDouble(4));
-                cm.setNivelJerarquico(rs.getInt(5));
-                cm.setEstado(rs.getString(6));
-                listaCargoEmpleado.add(cm); 
+    String sql = "Select * from CargoEmpleado";
+    List<CargoEmpleado> listaCargoEmpleado = new ArrayList<CargoEmpleado    >();
+    try {
+        con = cn.Conexion();
+        ps = con.prepareStatement(sql);
+        rs = ps.executeQuery();
+        while (rs.next()) {
+            CargoEmpleado cm = new CargoEmpleado();
+            cm.setCodigoCargoEmpleado(rs.getInt(1));
+            cm.setNombreCargo(rs.getString(2));
+            cm.setDescripcion(rs.getString(3));
+            cm.setSalarioBase(rs.getDouble(4));
+            cm.setNivelJerarquico(rs.getInt(5));
+            cm.setEstado(rs.getString(6));
+            listaCargoEmpleado.add(cm);
             }
-        }catch(Exception e){
-                e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return listaCargoEmpleado;
-    } 
+    }
+
     
      public boolean contieneLetras(String cadena) {
         for (int i = 0; i < cadena.length(); i++) {
@@ -130,7 +131,7 @@ public class CargoEmpleadoDAO {
     
     public CargoEmpleado listarCodigoCargoEmpleado(int id){
         CargoEmpleado emp = new CargoEmpleado();
-        String sql = "Select * from CargoEmpleado where CodigoCargoEmpleado = " + id;
+        String sql = "Select * from CargoEmpleado where codigoCargoEmpleado = " + id;
         try{
             con = cn.Conexion();
             ps = con.prepareStatement(sql);
@@ -150,7 +151,7 @@ public class CargoEmpleadoDAO {
     }
     
     public int actualizar(CargoEmpleado emp){
-        String sql = "Update CargoEmpleado set nombreCargo = ?, descripcion = ?, salarioBase = ?, NivelJerarquico = ?";
+        String sql = "Update CargoEmpleado set nombreCargo = ?, descripcion = ?, salarioBase = ?, nivelJerarquico = ?, estado = ? where codigoCargoEmpleado = ?";
         try{
             con = cn.Conexion();
             ps = con.prepareStatement(sql);
