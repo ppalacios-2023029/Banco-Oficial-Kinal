@@ -31,8 +31,8 @@ public class ClienteDAO {
             cl.setTelefonoCliente(rs.getString(5));
             cl.setCorreoCliente(rs.getString(6));
             cl.setDescripcion(rs.getString(7));
-            cl.setEstado(rs.getString(8));
-            cl.setCodigoTipoCuenta(rs.getInt(9));
+            cl.setCodigoTipoCuenta(rs.getInt(8));
+            cl.setEstado(rs.getString(9));
             listaClientes.add(cl);
         }
     }catch(Exception e){
