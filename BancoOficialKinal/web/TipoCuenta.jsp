@@ -74,7 +74,7 @@
                             </div>
                             <div class="form-group">
                                 <p class="TituloAgregar__subtitulos2">Tipo Cuenta</p>
-                                <input type="text" value="${tipoCuenta.getNombreEmpleado()}" name="txtTipoCuenta" class="form-control" placeholder="Tipo Cuenta">
+                                <input type="text" value="${tipoCuenta.getTipoCuenta()}" name="txtTipoCuenta" class="form-control" placeholder="Tipo Cuenta">
                             </div>
                             <div class="form-group">
                                 <p class="TituloAgregar__subtitulos2">Saldo Minimo</p>
@@ -82,18 +82,18 @@
                             </div>
                             <div class="form-group">
                                 <p class="TituloAgregar__subtitulos2">Intereses</p>
-                                <input type="text" value="${tipoCuenta.getApellidoEmpleado()}" name="txtTazaDeInteres" class="form-control" placeholder="Intereses">
+                                <input type="text" value="${tipoCuenta.getTazaDeInteres()}" name="txtTazaDeInteres" class="form-control" placeholder="Intereses">
                             </div>
                             <div class="form-group">
                                 <p class="TituloAgregar__subtitulos2">Impuestos</p>
-                                <input type="text" value="${tipoCuenta.getContrasena()}" name="txtTazaDeImpuestos" class="form-control" placeholder="Impuestos">
+                                <input type="text" value="${tipoCuenta.getTazaDeImpuestos()}" name="txtTazaDeImpuestos" class="form-control" placeholder="Impuestos">
                             </div>
                             <div class="form-group">
                                 <p class="TituloAgregar__subtitulos2">Estado</p>
                                 <select class="sl-foreign" name="txtEstado">
                                     <option selected>Elija una opción</option>
-                                    <option value="1" ${empleado.getEstado() == '1' ? 'selected' : ''}>Activo</option>
-                                    <option value="0" ${empleado.getEstado() == '0' ? 'selected' : ''}>Inactivo</option>
+                                    <option value="1" ${tipoCuenta.getEstado() == '1' ? 'selected' : ''}>Activo</option>
+                                    <option value="0" ${tipoCuenta.getEstado() == '0' ? 'selected' : ''}>Inactivo</option>
                                 </select>
                             </div>
                         </div>

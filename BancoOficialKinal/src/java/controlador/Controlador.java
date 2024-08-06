@@ -240,11 +240,11 @@ public class Controlador extends HttpServlet {
                     request.getRequestDispatcher("Controlador?menu=TipoCuenta&accion=Listar").forward(request, response);
                 break;
      
-                /*case "Buscar":
+                case "Buscar":
                     barraBuscar = request.getParameter("txtBuscar");
                     listaTipoC = tipoCuentaDAO.barraBusqueda(barraBuscar);
                     request.setAttribute("tipoCuentas", listaTipoC);
-                break;*/
+                break;
                 case "Cancelar":
                     request.getRequestDispatcher("Controlador?menu=TipoCuenta&accion=Listar").forward(request, response);
                 break;
