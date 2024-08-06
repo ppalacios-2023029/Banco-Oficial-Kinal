@@ -64,7 +64,7 @@ public class TipoCuentaDAO {
     }
     
     public List barraBusqueda(String info) {
-        String sql = "Select * from TipoCuenta where TipoCuenta like ? or SaldoMinimoRequerido like ? or TasaDeInteres like ? or TazaDeImpuestos like ? or estado like ? or codigoCargoEmpleado like ?";
+        String sql = "Select * from TipoCuenta where TipoCuenta like ? or estado like ? or codigoTipoCuenta like ?";
         List<TipoCuenta> listaTipoCuenta = new ArrayList<TipoCuenta>();
 
         try {
@@ -72,37 +72,24 @@ public class TipoCuentaDAO {
             ps = con.prepareStatement(sql);
 
             ps.setString(1, info);
+            ps.setString(2, info);
             if (contieneLetras(info) == true) {
-                ps.setDouble(2, 0.0);
-            } else {
-                ps.setDouble(2, Double.parseDouble(info));
-            }
-            if (contieneLetras(info) == true) {
-                ps.setDouble(3, 0.0);
-            } else {
-                ps.setDouble(3, Double.parseDouble(info));
-            }
-            if (contieneLetras(info) == true) {
-                ps.setDouble(4, 0.0);
-            } else {
-                ps.setDouble(4, Double.parseDouble(info));
-            }
-            if (contieneLetras(info) == true) {
-                ps.setInt(5, 0);
+                ps.setInt(3, 0);
             } else {
                 int numFuncional = limpiarDecimales(info);
-                ps.setInt(5, numFuncional);
+                ps.setInt(3, numFuncional);
             }
+            
             rs = ps.executeQuery();
             while (rs.next()) {
                 TipoCuenta tc = new TipoCuenta();
                 
-                tc.setTipoCuenta(rs.getString(1));
-                tc.setSaldoMinimoRequerido(rs.getDouble(2));
-                tc.setTazaDeInteres(rs.getDouble(3));
-                tc.setTazaDeImpuestos(rs.getDouble(4));
-                tc.setEstado(rs.getString(5));
-                tc.setCodigoTipoCuenta(rs.getInt(6));
+                tc.setCodigoTipoCuenta(rs.getInt(1));
+                tc.setTipoCuenta(rs.getString(2));
+                tc.setSaldoMinimoRequerido(rs.getDouble(3));
+                tc.setTazaDeInteres(rs.getDouble(4));
+                tc.setTazaDeImpuestos(rs.getDouble(5));
+                tc.setEstado(rs.getString(6));
                 listaTipoCuenta.add(tc);
             }
 

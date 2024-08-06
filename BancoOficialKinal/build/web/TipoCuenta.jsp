@@ -23,7 +23,7 @@
                 <div class="TablaCont">
                     <form action="Controlador?menu=TipoCuenta" method="POST">
                         <div class="header_table">
-                            <input type="submit" name="accion" value="Buscar" class="btn-Buscar">
+                            <input type="submit" name="accion" value="Buscar" href="Controlador?menu=TipoCuenta&accion=Buscar" class="btn-Buscar">
                             <input type="text" value="" name="txtBuscar" class="textSearch" placeholder="Buscar">
                         </div>
                     </form>
@@ -92,8 +92,8 @@
                                 <p class="TituloAgregar__subtitulos2">Estado</p>
                                 <select class="sl-foreign" name="txtEstado">
                                     <option selected>Elija una opción</option>
-                                    <option value="1" ${tipoCuenta.getEstado() == '1' ? 'selected' : ''}>Activo</option>
-                                    <option value="0" ${tipoCuenta.getEstado() == '0' ? 'selected' : ''}>Inactivo</option>
+                                    <option value="A" ${tipoCuenta.getEstado() == '1' ? 'selected' : ''}>Activo</option>
+                                    <option value="I" ${tipoCuenta.getEstado() == '0' ? 'selected' : ''}>Inactivo</option>
                                 </select>
                             </div>
                         </div>
