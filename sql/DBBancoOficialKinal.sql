@@ -170,9 +170,9 @@ INSERT INTO CargoEmpleado (nombreCargo, descripcion, salarioBase, nivelJerarquic
 INSERT INTO CargoEmpleado (nombreCargo, descripcion, salarioBase, nivelJerarquico, estado) VALUES ('Analista Financiero', 'Encargado del análisis de datos financieros y preparación de informes.', 3000.00, 2, '1');
 INSERT INTO CargoEmpleado (nombreCargo, descripcion, salarioBase, nivelJerarquico, estado) VALUES ('Asistente Administrativo', 'Soporte en tareas administrativas y gestión de documentos.', 1500.00, 3, '1');
 
-INSERT INTO Empleados (nombreEmpleado, apellidoEmpleado, usuario, contrasena, cargo, salario, oficina, estado, codigoCargoEmpleado,imagenUser) VALUES ('Jose', 'Gonzalez', 'jgonz', '1234', 'Gerente General', 5000.00, '101', '0', 1));
-INSERT INTO Empleados (nombreEmpleado, apellidoEmpleado, usuario, contrasena, cargo, salario, oficina, estado, codigoCargoEmpleado,imagenUser) VALUES ('Pablo', 'Palacios', 'ppalacios', '1234', 'Analista Financiero', 3000.00, '202', '1', 2));
-INSERT INTO Empleados (nombreEmpleado, apellidoEmpleado, usuario, contrasena, cargo, salario, oficina, estado, codigoCargoEmpleado,imagenUser) VALUES ('Nery', 'de la Cruz', 'neryd', '1234', 'Asistente Administrativo', 1500.00, '303', '1', 3));
+INSERT INTO Empleados (nombreEmpleado, apellidoEmpleado, usuario, contrasena, cargo, salario, oficina, estado, codigoCargoEmpleado) VALUES ('Jose', 'Gonzalez', 'jgonz', '1234', 'Gerente General', 5000.00, '101', '0', 1);
+INSERT INTO Empleados (nombreEmpleado, apellidoEmpleado, usuario, contrasena, cargo, salario, oficina, estado, codigoCargoEmpleado) VALUES ('Pablo', 'Palacios', 'ppalacios', '1234', 'Analista Financiero', 3000.00, '202', '1', 2);
+INSERT INTO Empleados (nombreEmpleado, apellidoEmpleado, usuario, contrasena, cargo, salario, oficina, estado, codigoCargoEmpleado) VALUES ('Nery', 'de la Cruz', 'neryd', '1234', 'Asistente Administrativo', 1500.00, '303', '1', 3);
 
 INSERT INTO Sucursales (nombreSucursal, direccionSucursal, telefono, correoSucursal, estado, codigoEmpleado) VALUES ('Sucursal Central', 'Avenida Principal 123', '123-456-7890', 'central@example.com', '0', 1);
 INSERT INTO Sucursales (nombreSucursal, direccionSucursal, telefono, correoSucursal, estado, codigoEmpleado) VALUES ('Sucursal Norte', 'Calle Norte 456', '098-765-4321', 'norte@example.com', '1', 2);
