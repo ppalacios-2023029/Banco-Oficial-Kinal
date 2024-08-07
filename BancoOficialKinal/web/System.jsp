@@ -111,13 +111,13 @@
             <span><a class="link_name" href="#">Seguro</a></span>
             <span><a href="#">Sucursales</a></span>
             <span><a aria-current="page" href="Controlador?menu=CargoEmpleado&accion=Listar" target="myFrame">Cargos</a></span>
-            <span><a aria-current="page" href="Controlador?menu=NuevaTarjeta&accion=Listar" target="myFrame">Dribbble</a></span>
+            <span><a aria-current="page" href="Controlador?menu=NuevaTarjeta&accion=Listar" target="myFrame">Crear Targeta</a></span>
           </ul>
         </li>
         <li id="prestamoNuevo">
           <a aria-current="page" href="Controlador?menu=BancoTarjetas&accion=BancoTarjetas" target="myFrame">
             <i class="ri-money-dollar-circle-fill"></i>
-            <span class="link_name">Pagos de Prestamos</span>
+            <span class="link_name">Solicitud de Targeta</span>
           </a>
           <div class="sub-menu blank">
             <span><a class="link_name" href="Controlador?menu=BancoTarjetas">Pagos de Prestamos </a></span>

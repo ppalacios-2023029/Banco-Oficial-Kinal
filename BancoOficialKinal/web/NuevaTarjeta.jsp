@@ -33,7 +33,7 @@
             </div>
             <div class="form-group">
                 <label >Monto Por Uso</label>
-                <input type="text" class="form-control"  name="txtMonto" placeholder="Ingresa el segundo texto" required>
+                <input type="text" class="form-control"  name="txtMonto" placeholder="Ingresa el tercer texto" required>
             </div>
 
             <input type="submit" class="btn btn-primary" value="Nuevo" name="acccion">

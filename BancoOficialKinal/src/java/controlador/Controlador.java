@@ -58,16 +58,12 @@ public class Controlador extends HttpServlet {
     
     int codCli;
     // -- Cambios de Tipo Cuenta --
-    TipoCuenta tipoCuenta = new TipoCuenta();
-    TipoCuentaDAO tipoCuentaDAO = new TipoCuentaDAO();
     double saldoMin;
     double interes;
     double impuestos;
     int codigoTipoCuenta;
     List listaTipoC;
     // ----------------------------
-    Prestamos prestamos = new Prestamos();
-    PrestamosDAO prestamosDAO = new PrestamosDAO();
     int codigoCargoEmpleado;
     double salario;
     int codigoEmpleado;
