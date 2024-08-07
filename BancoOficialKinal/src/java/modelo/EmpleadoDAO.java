@@ -1,11 +1,16 @@
 package modelo;
 
 import config.Conexion;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import javax.servlet.http.HttpServletResponse;
 
 public class EmpleadoDAO {
 
@@ -58,6 +63,7 @@ public class EmpleadoDAO {
                 em.setOficina(rs.getString(8));
                 em.setEstado(rs.getString(9));
                 em.setCodigoCargoEmpleado(rs.getInt(10));
+                em.setImagenUser(rs.getBinaryStream(11));
                 listaEmpleado.add(em);
             }
         } catch (Exception e) {
@@ -221,6 +227,34 @@ public class EmpleadoDAO {
             ps = con.prepareStatement(sql);
             ps.executeUpdate();
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    
+    public void listarImagen(int id, HttpServletResponse response){
+        String sql = "Select * from ProductoTarjeta where codigoProductoTarjeta = "+id;
+        InputStream inputStream = null;
+        BufferedInputStream bufferedInputStream = null;
+        BufferedOutputStream bufferedOutputStream = null;
+        OutputStream outPutStream = null;
+        response.setContentType("image/*");
+        try{
+            outPutStream = response.getOutputStream();
+            con = cn.Conexion();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            if(rs.next()){
+                inputStream = rs.getBinaryStream("imagen");
+                
+            }
+            bufferedInputStream = new BufferedInputStream(inputStream);
+            bufferedOutputStream = new BufferedOutputStream(outPutStream);
+            int i=0;
+            while((i=bufferedInputStream.read())!=-1){
+                bufferedOutputStream.write(i);
+            }
+        }catch(Exception e){
             e.printStackTrace();
         }
     }
