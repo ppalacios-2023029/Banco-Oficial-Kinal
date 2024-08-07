@@ -7,14 +7,14 @@ public class Transaccion {
     private String estadoTransaccion;
     private String tipoTransaccion;
     private double monto;
-    private Date fecha;
+    private String fecha;
     private String estado;
     private int codigoCliente;
 
     public Transaccion() {
     }
 
-    public Transaccion(int codigoTransaccion, String estadoTransaccion, String tipoTransaccion, double monto, Date fecha, String estado, int codigoCliente) {
+    public Transaccion(int codigoTransaccion, String estadoTransaccion, String tipoTransaccion, double monto, String fecha, String estado, int codigoCliente) {
         this.codigoTransaccion = codigoTransaccion;
         this.estadoTransaccion = estadoTransaccion;
         this.tipoTransaccion = tipoTransaccion;
@@ -56,11 +56,11 @@ public class Transaccion {
         this.monto = monto;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 
@@ -79,6 +79,8 @@ public class Transaccion {
     public void setCodigoCliente(int codigoCliente) {
         this.codigoCliente = codigoCliente;
     }
+
+
     
     
 }

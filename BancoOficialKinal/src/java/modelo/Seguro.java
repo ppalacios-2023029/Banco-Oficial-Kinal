@@ -8,14 +8,14 @@ public class Seguro {
     private String tipoSeguro;
     private double montoAsegurado;
     private double primaMensual;
-    private Date fechaExpiracion;
+    private String fechaExpiracion;
     private String estado;
     private int codigoCliente;
 
     public Seguro() {
     }
 
-    public Seguro(int numeroSeguro, String numeroPoliza, String tipoSeguro, double montoAsegurado, double primaMensual, Date fechaExpiracion, String estado, int codigoCliente) {
+    public Seguro(int numeroSeguro, String numeroPoliza, String tipoSeguro, double montoAsegurado, double primaMensual, String fechaExpiracion, String estado, int codigoCliente) {
         this.numeroSeguro = numeroSeguro;
         this.numeroPoliza = numeroPoliza;
         this.tipoSeguro = tipoSeguro;
@@ -66,11 +66,11 @@ public class Seguro {
         this.primaMensual = primaMensual;
     }
 
-    public Date getFechaExpiracion() {
+    public String getFechaExpiracion() {
         return fechaExpiracion;
     }
 
-    public void setFechaExpiracion(Date fechaExpiracion) {
+    public void setFechaExpiracion(String fechaExpiracion) {
         this.fechaExpiracion = fechaExpiracion;
     }
 

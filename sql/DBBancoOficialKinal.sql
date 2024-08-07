@@ -66,7 +66,6 @@ create table Sucursales (
     constraint FK_Sucursales_Empleados foreign key (codigoEmpleado) references Empleados(codigoEmpleado)
 );
 
-
 create table Transaccion(
 	codigoTransaccion INT not null AUTO_INCREMENT,
     estadoTransaccion VARCHAR(20) NOT NULL,
@@ -117,12 +116,12 @@ create table Tarjetas (
 );
 
 create table Seguro(
-	numeroSeguro int not null,
+	numeroSeguro int not null auto_increment,
     numeroPoliza varchar(20) not null,
     tipoSeguro varchar(20) not null,
     montoAsegurado double(10, 2) not null,
     primaMensual double(10, 2) not null,
-    fechaExpiracion date not null,
+    fechaExpiracion varchar(20) not null,
     estado varchar(1) not null,
     codigoCliente int not null,
     primary key PK_numeroSeguro(numeroSeguro),
@@ -185,19 +184,24 @@ INSERT INTO Tarjetas (numeroTarjeta, tipoTarjeta, CVC, fechaVencimiento, fechaEm
 INSERT INTO Tarjetas (numeroTarjeta, tipoTarjeta, CVC, fechaVencimiento, fechaEmision, limiteDeCredito, estado, codigoCliente)
 	VALUES ('3456-7890-1234-5678', 'Tarjeta de Crédito Empresarial', '789', '2024-10-31', '2021-03-01', 10000.00, '1', 3);
 
-INSERT INTO Seguro (numeroSeguro, numeroPoliza, tipoSeguro, montoAsegurado, primaMensual, fechaExpiracion, estado, codigoCliente)
-	VALUES (1, 'POL1234567890', 'Salud', 100000.00, 150.00, '2025-12-31', '0', 1);
-INSERT INTO Seguro (numeroSeguro, numeroPoliza, tipoSeguro, montoAsegurado, primaMensual, fechaExpiracion, estado, codigoCliente)
-	VALUES (2, 'POL2345678901', 'Automóvil', 50000.00, 80.00, '2024-11-30', '1', 2);
-INSERT INTO Seguro (numeroSeguro, numeroPoliza, tipoSeguro, montoAsegurado, primaMensual, fechaExpiracion, estado, codigoCliente)
-	VALUES (3, 'POL3456789012', 'Vida', 200000.00, 200.00, '2026-10-31', '1', 3);
+INSERT INTO Seguro ( numeroPoliza, tipoSeguro, montoAsegurado, primaMensual, fechaExpiracion, estado, codigoCliente)
+	VALUES ('POL1234567890', 'Salud', 100000.00, 150.00, '2025-12-31', '0', 1);
+INSERT INTO Seguro (numeroPoliza, tipoSeguro, montoAsegurado, primaMensual, fechaExpiracion, estado, codigoCliente)
+	VALUES ('POL2345678901', 'Automóvil', 50000.00, 80.00, '2024-11-30', '1', 2);
+INSERT INTO Seguro (numeroPoliza, tipoSeguro, montoAsegurado, primaMensual, fechaExpiracion, estado, codigoCliente)
+	VALUES ('POL3456789012', 'Vida', 200000.00, 200.00, '2026-10-31', '1', 3);
     
 INSERT INTO DetalleCuenta (fechaDetalle, tipoOperacion, estadoCuenta, codigoCliente, codigoEmpleado, codigoSucursal) VALUES ('2024-07-10', 'Depósito', 'Confirmado', 1, 1, 1);
 INSERT INTO DetalleCuenta (fechaDetalle, tipoOperacion, estadoCuenta, codigoCliente, codigoEmpleado, codigoSucursal) VALUES ('2024-07-12', 'Retiro', 'Pendiente', 2, 2, 2);
 INSERT INTO DetalleCuenta (fechaDetalle, tipoOperacion, estadoCuenta, codigoCliente, codigoEmpleado, codigoSucursal) VALUES ('2024-07-15', 'Transferencia', 'Completado', 3, 3, 3);
 
+
 select * from Empleados where usuario='neryd' and contrasena = '1234';
 select * from CargoEmpleado;
-
+select * from seguro;
 
 Select * from Empleados where nombreEmpleado like '' or apellidoEmpleado like '' or usuario like 'neryd' or contrasena like '' or cargo like '' or salario like 0.0 or oficina like '' or estado like '' or codigoCargoEmpleado like 1 ;
+Select * from Seguro where numeroPoliza like '' or tipoSeguro like '' or montoAsegurado like 0.00 or primaMensual like 0.00 or fechaExpiracion like '' or  estado like '' or codigoCliente like 1 ;
+Select * from Sucursales where nombreSucursal like '' or direccionSucursal like '' or telefono like '' or correoSucursal like ''  or  estado like '' or codigoEmpleado like 1 ;
+
+Select * from Seguro where numeroSeguro = 1;
