@@ -50,6 +50,7 @@ create table Empleados (
     oficina VARCHAR(50) NOT NULL,
     estado varchar(1) not null,
     codigoCargoEmpleado int,
+    imagenUser longblob,
     primary key PK_codigoEmpleado(codigoEmpleado),
     constraint FK_Empleados_CargoEmpleado foreign key (codigoCargoEmpleado) references CargoEmpleado(codigoCargoEmpleado)
 );
@@ -170,14 +171,14 @@ INSERT INTO CargoEmpleado (nombreCargo, descripcion, salarioBase, nivelJerarquic
 INSERT INTO CargoEmpleado (nombreCargo, descripcion, salarioBase, nivelJerarquico, estado) VALUES ('Analista Financiero', 'Encargado del análisis de datos financieros y preparación de informes.', 3000.00, 2, '1');
 INSERT INTO CargoEmpleado (nombreCargo, descripcion, salarioBase, nivelJerarquico, estado) VALUES ('Asistente Administrativo', 'Soporte en tareas administrativas y gestión de documentos.', 1500.00, 3, '1');
 
-INSERT INTO Empleados (nombreEmpleado, apellidoEmpleado, usuario, contrasena, cargo, salario, oficina, estado, codigoCargoEmpleado) VALUES ('Ana', 'Martínez', 'amartinez', 'password1', 'Gerente General', 5000.00, '101', '0', 1);
-INSERT INTO Empleados (nombreEmpleado, apellidoEmpleado, usuario, contrasena, cargo, salario, oficina, estado, codigoCargoEmpleado) VALUES ('Luis', 'Gómez', 'lgomez', 'password2', 'Analista Financiero', 3000.00, '202', '1', 2);
-INSERT INTO Empleados (nombreEmpleado, apellidoEmpleado, usuario, contrasena, cargo, salario, oficina, estado, codigoCargoEmpleado) VALUES ('Marta', 'Rodríguez', 'neryd', '1234', 'Asistente Administrativo', 1500.00, '303', '1', 3);
+INSERT INTO Empleados (nombreEmpleado, apellidoEmpleado, usuario, contrasena, cargo, salario, oficina, estado, codigoCargoEmpleado,imagenUser) VALUES ('Ana', 'Martínez', 'amartinez', 'password1', 'Gerente General', 5000.00, '101', '0', 1,LOAD_FILE('C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/Credita-card-4.png'));
+INSERT INTO Empleados (nombreEmpleado, apellidoEmpleado, usuario, contrasena, cargo, salario, oficina, estado, codigoCargoEmpleado,imagenUser) VALUES ('Luis', 'Gómez', 'lgomez', 'password2', 'Analista Financiero', 3000.00, '202', '1', 2,LOAD_FILE('C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/Credita-card-4.png'));
+INSERT INTO Empleados (nombreEmpleado, apellidoEmpleado, usuario, contrasena, cargo, salario, oficina, estado, codigoCargoEmpleado,imagenUser) VALUES ('Marta', 'Rodríguez', 'neryd', '1234', 'Asistente Administrativo', 1500.00, '303', '1', 3,LOAD_FILE('C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/Credita-card-4.png'));
 
 INSERT INTO Sucursales (nombreSucursal, direccionSucursal, telefono, correoSucursal, estado, codigoEmpleado) VALUES ('Sucursal Central', 'Avenida Principal 123', '123-456-7890', 'central@example.com', '0', 1);
 INSERT INTO Sucursales (nombreSucursal, direccionSucursal, telefono, correoSucursal, estado, codigoEmpleado) VALUES ('Sucursal Norte', 'Calle Norte 456', '098-765-4321', 'norte@example.com', '1', 2);
 INSERT INTO Sucursales (nombreSucursal, direccionSucursal, telefono, correoSucursal, estado, codigoEmpleado) VALUES('Sucursal Sur', 'Boulevard Sur 789', '567-890-1234', 'sur@example.com', '1', 3);
-
+select * from empleados;
 INSERT INTO Transaccion (estadoTransaccion, TipoTransaccion, Monto, Fecha, estado, codigoCliente) VALUES ('Completada', 'Depósito', 1500.00, '2024-07-01', '0', 1);
 INSERT INTO Transaccion (estadoTransaccion, TipoTransaccion, Monto, Fecha, estado, codigoCliente) VALUES ('Pendiente', 'Retiro', 500.00, '2024-07-02', '1', 2);
 INSERT INTO Transaccion (estadoTransaccion, TipoTransaccion, Monto, Fecha, estado, codigoCliente) VALUES ('Completada', 'Transferencia', 250.00, '2024-07-03', '1', 3);
@@ -215,7 +216,7 @@ INSERT INTO DetalleCuenta (fechaDetalle, tipoOperacion, estadoCuenta, codigoClie
 INSERT INTO DetalleCuenta (fechaDetalle, tipoOperacion, estadoCuenta, codigoCliente, codigoEmpleado, codigoSucursal) VALUES ('2024-07-15', 'Transferencia', 'Completado', 3, 3, 3);
 
 
-
+SHOW VARIABLES LIKE 'secure_file_priv';
 select * from Empleados where usuario='neryd' and contrasena = '1234';
 select * from CargoEmpleado;
 select * from seguro;

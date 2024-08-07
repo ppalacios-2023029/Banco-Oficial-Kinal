@@ -43,7 +43,7 @@
         <li id="principal">
           <a href="#">
             <i class="ri-home-4-fill"></i>
-            <span class="link_name">Pricipal</span>
+            <span class="link_name">Principal</span>
           </a>
           <div class="sub-menu blank">
             <span><a aria-current="page" href="Controlador?menu=Empleado&accion=Listar" target="myFrame">Principal</a></span>
@@ -83,7 +83,7 @@
           <ul class="sub-menu">
             <span><a class="link_name" href="#">Tipo</a></span>
             <span><a aria-current="page" href="Controlador?menu=Seguro&accion=Listar" target="myFrame">Seguros</a></span>
-            <span><a href="#">Targetas</a></span>
+            <span><a aria-current="page" href="Controlador?menu=Tarjeta&accion=Listar" target="myFrame">Tarjetas</a></span>
             <span><a aria-current="page" href="Controlador?menu=Transaccion&accion=Listar" target="myFrame">Transacciones</a></span>
             <span><a aria-current="page" href="Controlador?menu=TipoCuenta&accion=Listar" target="myFrame">Tipos de Cuentas</a></span>
           </ul>
@@ -153,7 +153,7 @@
           <img src="assets/img/fav-icon.png" alt="Profile Picture" class="profile-image">
           <div>
             <span class="name">${empleado.getNombreEmpleado()}</span><br>
-            <small class="role">${cargoEmpleado.getNombreCargo()}</small>
+            <small class="role">${empleado.getUsuario()}</small>
           </div>
         </button>
         
@@ -233,7 +233,7 @@
 
     <div class="iframe-container">
         
-      <iframe name="myframe"></iframe>
+      <iframe name="myFrame"></iframe>
   </div>
   
 </section>
