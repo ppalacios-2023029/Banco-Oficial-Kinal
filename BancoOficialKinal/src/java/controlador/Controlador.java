@@ -37,7 +37,7 @@ public class Controlador extends HttpServlet {
     TipoCuentaDAO tipoCuentaDAO = new TipoCuentaDAO();
     
     Clientes cliente = new Clientes();
-    ClienteDAO clietneDao = new ClienteDAO();
+    ClienteDAO clienteDao = new ClienteDAO();
     
     int codCli;
     int codigoCargoEmpleado;
@@ -57,6 +57,7 @@ public class Controlador extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         String menu = request.getParameter("menu");
         String accion = request.getParameter("accion");
         
@@ -199,28 +200,78 @@ public class Controlador extends HttpServlet {
         }else if (menu.equals("Cliente")){
             switch (accion) {
                 case "Listar":
-                    List listaClientes = clietneDao.listar();
+                    List listaClientes = clienteDao.listar();
                     List listaTipoCuenta = tipoCuentaDAO.listar();
                     request.setAttribute("clientes", listaClientes);
                     request.setAttribute("tipoCuentas", listaTipoCuenta);
                 break;
 
                 case "Agregar":
-                    
+                    String nombres = request.getParameter("txtNombreCliente");
+                    String apellidos = request.getParameter("txtApellidoCliente");
+                    String direccion = request.getParameter("txtDireccionCliente");
+                    String telefono = request.getParameter("txtTelefonoCliente");
+                    String correo = request.getParameter("txtCorreoCliente");
+                    String descrip = request.getParameter("txtDescripcionCliente");
+                    int codTC = Integer.parseInt(request.getParameter("ddlCliente"));
+                    String estado = request.getParameter("txtEstado");
+                    cliente.setNombreCliente(nombres);
+                    cliente.setApellidoCliente(apellidos);
+                    cliente.setDireccionCliente(direccion);
+                    cliente.setTelefonoCliente(telefono);
+                    cliente.setCorreoCliente(correo);
+                    cliente.setDescripcion(descrip);
+                    cliente.setCodigoTipoCuenta(codTC);
+                    cliente.setEstado(estado);
+                    clienteDao.agregar(cliente);
+                    request.getRequestDispatcher ("Controlador?menu=Cliente&accion=Listar") . forward(request, response);
                 break;
 
                 case "Editar":
                     codCli = Integer.parseInt(request.getParameter("codigoCliente"));
-                    Clientes cl = clietneDao.listaCodigoClientes(codCli);
-                    request.setAttribute ("empleado", cl) ;
-                    request.getRequestDispatcher ("Controlador?menu=Empleado&accion=Listar") . forward(request, response);
+                    Clientes cl = clienteDao.listaCodigoClientes(codCli);
+                    request.setAttribute ("cliente", cl) ;
+                    request.getRequestDispatcher ("Controlador?menu=Cliente&accion=Listar") . forward(request, response);
                 break;
 
                 case "Actualizar":
+                    String nombre = request.getParameter("txtNombreCliente");
+                    String apellido = request.getParameter("txtApellidoCliente");
+                    String direcion = request.getParameter("txtDireccionCliente");
+                    String telefonos = request.getParameter("txtTelefonoCliente");
+                    String correos = request.getParameter("txtCorreoCliente");
+                    String descripcion = request.getParameter("txtDescripcionCliente");
+                    String estao = request.getParameter("txtEstado");
+                    cliente.setNombreCliente(nombre);
+                    cliente.setApellidoCliente(apellido);
+                    cliente.setDireccionCliente(direcion);
+                    cliente.setTelefonoCliente(telefonos);
+                    cliente.setCorreoCliente(correos);
+                    cliente.setDescripcion(descripcion);
+                    cliente.setEstado(estao);
+                    cliente.setCodigoCliente(codCli);
+                    clienteDao.actualizar(cliente);
+                    request.getRequestDispatcher ("Controlador?menu=Cliente&accion=Listar") . forward(request, response);
                 break;
 
                 case "Eliminar":
+                    codCli = Integer.parseInt(request.getParameter("codigoCliente"));
+                    clienteDao.eliminar(codCli);
+                    request.getRequestDispatcher ("Controlador?menu=Cliente&accion=Listar") . forward(request, response);
                 break;
+                
+                case "Cancelar":
+                    request.getRequestDispatcher ("Controlador?menu=Cliente&accion=Listar") . forward(request, response);
+                break;
+                
+                case "Buscar":  // Nuevo caso para búsqueda
+                    String textoBuscar = request.getParameter("txtBuscar");
+                    List<Clientes> listaClientesBuscados = clienteDao.buscarClientesBarra(textoBuscar);
+                    List listaTipoCuentaBuscado = tipoCuentaDAO.listar();
+                    request.setAttribute("clientes", listaClientesBuscados);
+                    request.setAttribute("tipoCuentas", listaTipoCuentaBuscado);
+                break;
+
             }
             request.getRequestDispatcher("Cliente.jsp").forward(request, response);
         }else if (menu.equals("Producto")){

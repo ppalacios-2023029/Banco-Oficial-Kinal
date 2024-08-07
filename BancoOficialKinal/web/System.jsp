@@ -139,31 +139,83 @@
             <input type="text" placeholder="Search here...">
         </div>
 
-        <i class="ri-moon-line  change-theme" id="theme-button"></i>
-
-        <div class="profile-container">
-          <div class="dropdown">
-            <div class="profile-info">
-              <img src="assets/img/ac.png" alt="Profile Picture" class="profile-image">
-              <div>
-                <span class="name">Johndoe</span><br>
-                <small class="role">Super Admin</small>
-              </div>
-            </div>
-
+        <!-- Botón para abrir el modal -->
+        <button id="abrirModal" class="profile-info">
+          <img src="assets/img/fav-icon.png" alt="Profile Picture" class="profile-image">
+          <div>
+            <span class="name">${empleado.getNombreEmpleado()}</span><br>
+            <small class="role">${cargoEmpleado.getNombreCargo()}</small>
+          </div>
+        </button>
+        
+        <!-- Estructura del modal principal -->
+        <div id="miModal" class="modal">
+          <div class="modal-contenido">
+            <span class="cerrar">&times;</span>
             <div class="dropdown-content">
-              <a href="#" class="dropdown-item">
+              <a href="#" id="openPerfil" class="dropdown-item">
                 <i class="ri-user-3-fill text-primary"></i>
                 <span class="ms-2">Perfil</span>
               </a>
-              <a href="#" class="dropdown-item">
+              <a href="#" id="openConfiguracion" class="dropdown-item">
                 <i class="ri-mail-line text-success"></i>
                 <span class="ms-2">Configuración</span>
               </a>
               <a href="#" class="dropdown-item">
-                <i class="ri-logout-box-r-line text-danger"></i>
-                <span class="ms-2">Salir</span>
+                <form action="Validar" method="POST">
+                    <i class="ri-logout-box-r-line text-danger"></i>
+                      <button name="accion" name="Salir" class="Salir" href="#">Salir</button>
+                      
+                </form>
               </a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Modal para la opción "Perfil" -->
+        <div id="modalPerfil" class="modal">
+          <div class="modal-contenido2">
+            <span class="cerrar">&times;</span>
+            <h2>Perfil</h2>
+            <div class="perfil-datos">
+            <img src="assets/img/fav-icon.png" alt="Profile Picture" class="profile-datos-img">
+            <div class="datos">
+                <form action="Controlador?menu=Empleado&accion=Listar" method="POST">
+                  <div class="containerInputs">
+                      <div class="TituloAgregar">
+                          <p class="TituloAgregar__subtitulos1">Mis Datos</p>
+                      </div>
+                      <div class="form-group">
+                          <p class="TituloAgregar__subtitulos2">Nombre Empleado</p>
+                          <input type="text" value="${empleado.getNombreEmpleado()}" name="txtNombreEmpleado" class="form-control" placeholder="Nombre Empleado">
+                      </div>
+                      <div class="form-group">
+                          <p class="TituloAgregar__subtitulos2">Apellido Empleado</p>
+                          <input type="text" value="${empleado.getApellidoEmpleado()}" name="txtApellidoEmpleado" class="form-control" placeholder="Apellido Empleado">
+                      </div>
+                      <div class="form-group">
+                          <p class="TituloAgregar__subtitulos2">Usuario</p>
+                          <input type="text" value="${empleado.getUsuario()}" name="txtUsuario" class="form-control" placeholder="Usuario">
+                      </div>
+                      <div class="form-group">
+                          <p class="TituloAgregar__subtitulos2">Contraseña</p>
+                          <input type="text" value="${empleado.getContrasena()}" name="txtContrasena" class="form-control" placeholder="Contraseña">
+                      </div>
+                  </div>
+                </form>
+            </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Modal para la opción "Configuración" -->
+        <div id="modalConfiguracion" class="modal">
+          <div class="modal-contenido1">
+            <span class="cerrar">&times;</span>
+            <h2>Configuración</h2>
+            <div class="modo-oscuro">
+              <span>Modo Oscuro</span>
+              <i class="ri-moon-line  change-theme" id="theme-button"></i>
             </div>
           </div>
         </div>
@@ -172,7 +224,7 @@
 
     <div class="iframe-container">
         
-      <iframe name="myFrame"></iframe>
+      <iframe name="myframe"></iframe>
   </div>
   
 </section>

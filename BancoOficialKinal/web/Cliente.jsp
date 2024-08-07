@@ -33,12 +33,12 @@
                                 <th class="trTexto">Código</th>
                                 <th class="trTexto">Nombre</th>
                                 <th class="trTexto">Apellido</th>
-                                <th class="trTexto">Usuario</th>
-                                <th class="trTexto">Contraseña</th>
-                                <th class="trTexto">Cargo</th>
-                                <th class="trTexto">Salario</th>
+                                <th class="trTexto">Direccion</th>
+                                <th class="trTexto">Celular</th>
+                                <th class="trTexto">Correo</th>
+                                <th class="trTexto">Descripcion</th>
                                 <th class="trTexto">Estado</th>
-                                <th class="trTexto">Cod Cargo</th>
+                                <th class="trTexto">Tipo de Cuenta</th>
                                 <th class="trTexto_acciones">ACCIONES</th>
                             </tr>
                         </thead>
@@ -54,6 +54,10 @@
                                     <td>${cliente.getDescripcion()}</td>
                                     <td>${cliente.getCodigoTipoCuenta()}</td>
                                     <td>${cliente.getEstado()}</td>
+                                    <td class="controles_table">
+                                        <a class="btn btnEditar" href="Controlador?menu=Cliente&accion=Editar&codigoCliente=${cliente.getCodigoCliente()}">Editar</a>
+                                        <a class="btn btnEliminar" href="Controlador?menu=Cliente&accion=Eliminar&codigoCliente=${cliente.getCodigoCliente()}">Eliminar</a>
+                                    </td>
                                 </tr>
                             </c:forEach>
                         </tbody>
@@ -73,45 +77,40 @@
                                 <p class="TituloAgregar__subtitulos1">Agregar</p>
                             </div>
                             <div class="form-group">
-                                <p class="TituloAgregar__subtitulos2">Nombre Empleado</p>
-                                <input type="text" value="" name="txtNombreEmpleado" class="form-control" placeholder="Nombre Empleado">
+                                <p class="TituloAgregar__subtitulos2">Nombre</p>
+                                <input type="text" value="${cliente.getNombreCliente()}" name="txtNombreCliente" class="form-control" placeholder="Nombre">
                             </div>
                             <div class="form-group">
-                                <p class="TituloAgregar__subtitulos2">Apellido Empleado</p>
-                                <input type="text" value="" name="txtApellidoEmpleado" class="form-control" placeholder="Apellido Empleado">
+                                <p class="TituloAgregar__subtitulos2">Apellido</p>
+                                <input type="text" value="${cliente.getApellidoCliente()}" name="txtApellidoCliente" class="form-control" placeholder="Apellido">
                             </div>
                             <div class="form-group">
-                                <p class="TituloAgregar__subtitulos2">Usuario</p>
-                                <input type="text" value="" name="txtUsuario" class="form-control" placeholder="Usuario">
+                                <p class="TituloAgregar__subtitulos2">Direccion</p>
+                                <input type="text" value="${cliente.getDireccionCliente()}" name="txtDireccionCliente" class="form-control" placeholder="Direccion">
                             </div>
                             <div class="form-group">
-                                <p class="TituloAgregar__subtitulos2">Contraseña</p>
-                                <input type="text" value="" name="txtContrasena" class="form-control" placeholder="Contraseña">
+                                <p class="TituloAgregar__subtitulos2">Celular</p>
+                                <input type="text" value="${cliente.getTelefonoCliente()}" name="txtTelefonoCliente" class="form-control" placeholder="Celular">
                             </div>
                             <div class="form-group">
-                                <p class="TituloAgregar__subtitulos2">Cargo</p>
-                                <input type="text" value="" name="txtCargo" class="form-control" placeholder="Cargo">
+                                <p class="TituloAgregar__subtitulos2">Correo</p>
+                                <input type="text" value="${cliente.getCorreoCliente()}" name="txtCorreoCliente" class="form-control" placeholder="Correo">
                             </div>
                             <div class="form-group">
-                                <p class="TituloAgregar__subtitulos2">Salario</p>
-                                <input type="text" value="" name="txtSalario" class="form-control" placeholder="Salario">
-                            </div>
-                            <div class="form-group">
-                                <p class="TituloAgregar__subtitulos2">Oficina</p>
-                                <input type="number" id="quantity" name="txtOficina" min="100" max="765" value="" class="sl-foreign input-number">
+                                <p class="TituloAgregar__subtitulos2">Descripcion</p>
+                                <input type="text" value="${cliente.getDescripcion()}" name="txtDescripcionCliente" class="form-control" placeholder="Descripcion">
                             </div>
                             <div class="form-group">
                                 <p class="TituloAgregar__subtitulos2">Estado</p>
                                 <select class="sl-foreign" name="txtEstado">
                                     <option selected>Elija una opción</option>
-                                    <option value="1" >Activo</option>
-                                    <option value="0" >Inactivo</option>
+                                    <option value="A" ${cliente.getEstado() == 'A' ? 'selected' : ''}>Activo</option>
+                                    <option value="I" ${cliente.getEstado() == 'I' ? 'selected' : ''}>Inactivo</option>
                                 </select>
-
                             </div>
                             <div class="form-group">
-                                <p class="TituloAgregar__subtitulos2">Tipo Cliente</p>
-                                <select class="sl-foreign" name="ddlCargoEmpleado">
+                                <p class="TituloAgregar__subtitulos2">Tipo de Cuenta</p>
+                                <select class="sl-foreign" name="ddlCliente">
                                     <option selected>Elija una opción</option> <!-- Mantén la opción predeterminada deshabilitada -->
                                     <c:forEach var="listasTC" items="${tipoCuentas}">
                                         <option value="${listasTC.getCodigoTipoCuenta()}"

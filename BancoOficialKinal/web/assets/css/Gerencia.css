@@ -12,12 +12,12 @@
 :root{
     --primary-color: #0E4BF1;
     --dashboard-color: #fff;
-    --panel-color: #070824;
+    --panel-color: hsl(234, 41%, 13%);
     --text-color: #000;
     --black-light-color: #707070;
     --border-color: #e6e5e5;
     --toggle-color: #DDD;
-    --box1-color: #4DA3FF;
+    --box1-color: #98c8fc;
     --box2-color: #FFE6AC;
     --box3-color: #E7D1FC;
     --title-icon-color: #fff;
@@ -37,6 +37,8 @@
 
 body {
   overflow: hidden;
+  height: 100vh;
+  margin: 0;
 }
 
 .change-theme{
@@ -53,6 +55,7 @@ body.dark-theme{
   --black-light-color: #8f8e8e;
   --border-color: #08123d;
   --panel-color: hsl(193, 47%, 4%);
+  --box1-color: #f7f7f7;
 }
 
 
@@ -426,16 +429,13 @@ nav .nav-links li:nth-child(7):hover {
       rgba(255, 154, 47, 0.19));
 }
 
-.profile-container {
-  display: flex;
-  align-items: center;
-  padding-right: 50px;
-}
-
 .profile-info {
-  display: flex;
   align-items: center;
   cursor: pointer;
+  background-color: var(--dashboard-color);
+  border: none;
+  display: flex;
+  padding-right: 50px;
 }
 
 .profile-image {
@@ -459,38 +459,79 @@ nav .nav-links li:nth-child(7):hover {
   line-height: 1.2;
 }
 
-.dropdown {
-  position: relative;
-  display: inline-block;
+/* Agregamos estilos para el modal */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 100; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
+/* Modal Content/Box */
+.modal-contenido {
+  background-color: var(--dashboard-color);
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid var(--border-color);
+  width: 80%;
+  animation: fadeIn 0.5s ease-in-out;
+  color: var(--text-color);
+}
+
+/* The Close Button */
+.cerrar {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.cerrar:hover,
+.cerrar:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Ajustamos los estilos del dropdown-content para que se vea bien dentro del modal */
 .dropdown-content {
-  display: none;
-  position: absolute;
-  padding: 15px 0px;
-  min-width: 12.5rem;
-  right: 0;
-  background-color: #fff;
-  box-shadow: 10px 10px 20px #cbced1, -10px -10px 20px #ffffff;
-  z-index: 1;
-  text-align: left;
-  border-radius: 0.75rem;
-  padding: 8px 24px;
+  padding: 0;
+  min-width: 100%;
+  box-shadow: none;
+  border-radius: 0;
 }
 
 .dropdown-content a {
-  color: black;
   padding: 12px 16px;
   text-decoration: none;
   display: block;
 }
 
-.dropdown-content a:hover {
-  background-color: #f1f1f1;
+.dropdown-item {
+  pointer-events: auto;
+  cursor: pointer;
 }
 
-.dropdown-item:hover{
+.dropdown-item:hover {
+  background-color: #ddd;
   color: #fc5130;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .text-primary {
@@ -510,10 +551,6 @@ nav .nav-links li:nth-child(7):hover {
 }
 
 .profile-info:hover .dropdown-content {
-  display: block;
-}
-
-.show {
   display: block;
 }
 
@@ -591,6 +628,28 @@ nav.close ~ .dashboard .top{
   color: var(--black-light-color);
 }
 
+.search-results-container {
+  position: absolute;
+  top: 45px;
+  width: 100%;
+  background-color: var(--dashboard-color);
+  border: 1px solid var(--border-color);
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+.search-results-container .result-item {
+  padding: 10px;
+  cursor: pointer;
+  color: var(--text-color);
+}
+
+.search-results-container .result-item:hover {
+  background-color: #ddd;
+  color: var(--black-light-color);
+}
+
 .top img{
   width: 40px;
   border-radius: 50%;
@@ -610,37 +669,79 @@ nav.close ~ .dashboard .top{
 }
 
 .iframe-container {
-  position: absolute;  
-  flex: 1;  
+  
+  height: calc(100% - 80px); /* Define la altura del contenedor */
+  width: 100%; /* Define la anchura del contenedor */
+  margin-top: 55px; /* Ajusta la posición del contenedor */
+  padding: 0; /* Elimina el padding del contenedor */
+  overflow: hidden; /* Oculta el contenido que se desborda */
   background-color: transparent;
-  overflow: hidden;  
-  margin: 0;
-  padding: 0;
-  height: calc(100% - 80px);
-  width: 100%;
-  margin-top: 55px;
+  
 }
 
 iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  border: none;
-  background-image: url("../img/fav-icon.png");
-  background-position: center;
-  background-size: cover;
+  
+  height: 100%; /* Define la altura del iframe */
+  width: 100%; /* Define la anchura del iframe */
+  border: 0px; /* Elimina el borde del iframe */
+  
 }
 
-
-.body-image-dash {
-  height: auto;
-  max-height: 100%;
-  width: 52%;
-  object-fit: contain;
+.iframe-container iframe{
+  z-index: 1;
 }
 
+.modal-contenido1 {
+  background-color: var(--dashboard-color);
+  margin: 5% auto; /* Ajusta el margen superior e inferior */
+  padding: 20px;
+  border: 1px solid var(--border-color);
+  width: 35%; /* Ajusta el ancho del modal */
+  color: var(--text-color);
+}
+
+.modal-contenido2 {
+  background-color: var(--dashboard-color);
+  margin: 5% auto; /* Ajusta el margen superior e inferior */
+  padding: 20px;
+  border: 1px solid var(--border-color);
+  width: 35%; /* Ajusta el ancho del modal */
+  color: var(--text-color);
+}
+
+.modo-oscuro {
+  padding-top: 35px;
+  display: flex;
+  justify-content: space-between; /* Asegura que el texto y el ícono estén en extremos opuestos */
+  align-items: center;
+  width: 100%; /* Asegura que ocupe todo el ancho disponible */
+}
+
+.perfil-datos {
+  padding-top: 35px;
+  display: flex;
+  align-items: center;
+}
+
+.perfil-datos .profile-datos-img img{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.modo-oscuro i {
+  margin-left: auto; /* Empuja el ícono hacia el lado opuesto del texto */
+}
+
+.modal-contenido h2 {
+  margin-bottom: 100px; /* Ajusta este valor para el espacio deseado */
+}
+
+.Salir{
+    background-color: transparent;
+    border: none;
+}
 
 @media screen and (max-width: 400px) {
   nav {

@@ -3,27 +3,23 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/web/System.jsp</file>
-            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/src/java/controlador/Controlador.java</file>
-            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/src/java/modelo/CargoEmpleado.java</file>
-            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/src/java/modelo/EmpleadoDAO.java</file>
-            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/src/java/modelo/CargoEmpleadoDAO.java</file>
-            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/web/css/system.css</file>
-            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/web/home.jsp</file>
-            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/web/assets/css/Gerencia.css</file>
-            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/src/java/modelo/Empleado.java</file>
-            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/web/Empleado.jsp</file>
-            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/src/java/controlador/Validar.java</file>
-            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/web/assets/js/scripts.js</file>
-        </group>
-        <group>
-            <file>file:/C:/Proyecto-IN5AV/Banco-Oficial-Kinal/BancoOficialKinal/src/java/config/Conexion.java</file>
-            <file>file:/C:/Proyecto-IN5AV/Banco-Oficial-Kinal/BancoOficialKinal/web/System.jsp</file>
             <file>file:/C:/Proyecto-IN5AV/Banco-Oficial-Kinal/BancoOficialKinal/src/java/controlador/Controlador.java</file>
             <file>file:/C:/Proyecto-IN5AV/Banco-Oficial-Kinal/BancoOficialKinal/web/Empleado.jsp</file>
         </group>
         <group>
+            <file>file:/C:/Proyecto-IN5AV/Banco-Oficial-Kinal/BancoOficialKinal/src/java/controlador/Controlador.java</file>
+            <file>file:/C:/Proyecto-IN5AV/Banco-Oficial-Kinal/BancoOficialKinal/web/Cliente.jsp</file>
+            <file>file:/C:/Proyecto-IN5AV/Banco-Oficial-Kinal/BancoOficialKinal/web/System.jsp</file>
             <file>file:/C:/Proyecto-IN5AV/Banco-Oficial-Kinal/BancoOficialKinal/src/java/config/Conexion.java</file>
+            <file>file:/C:/Proyecto-IN5AV/Banco-Oficial-Kinal/BancoOficialKinal/src/java/modelo/ClienteDAO.java</file>
+            <file>file:/C:/Proyecto-IN5AV/Banco-Oficial-Kinal/BancoOficialKinal/web/assets/js/scripts.js</file>
+            <file>file:/C:/Proyecto-IN5AV/Banco-Oficial-Kinal/BancoOficialKinal/web/css/system.css</file>
+            <file>file:/C:/Proyecto-IN5AV/Banco-Oficial-Kinal/BancoOficialKinal/web/assets/css/Gerencia.css</file>
+            <file>file:/C:/Proyecto-IN5AV/Banco-Oficial-Kinal/BancoOficialKinal/src/java/modelo/Clientes.java</file>
+            <file>file:/C:/Proyecto-IN5AV/Banco-Oficial-Kinal/BancoOficialKinal/web/Empleado.jsp</file>
+        </group>
+        <group>
+            <file>file:/C:/Users/jgonz/Desktop/Banco-Oficial-Kinal/BancoOficialKinal/src/java/config/Conexion.java</file>
         </group>
     </open-files>
 </project-private>
