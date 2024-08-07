@@ -43,13 +43,10 @@ public class Controlador extends HttpServlet {
     EmpleadoDAO empleadoDAO = new EmpleadoDAO();
     CargoEmpleado cargoempleado = new CargoEmpleado();
     CargoEmpleadoDAO cargoEmpleadoDAO = new CargoEmpleadoDAO();
-    Prestamos prestamos = new Prestamos();
-    PrestamosDAO prestamosDAO = new PrestamosDAO();
-    NuevaTarjeta nt = new NuevaTarjeta();
-    NuevaTarjetaDAO ntDAO = new NuevaTarjetaDAO();
-    
     Prestamo prestamos = new Prestamo();
     PrestamoDAO prestamosDAO = new PrestamoDAO();
+    NuevaTarjeta nt = new NuevaTarjeta();
+    NuevaTarjetaDAO ntDAO = new NuevaTarjetaDAO();
     
     TipoCuenta tipoCuenta = new TipoCuenta();
     TipoCuentaDAO tipoCuentaDAO = new TipoCuentaDAO();
@@ -295,7 +292,6 @@ public class Controlador extends HttpServlet {
                     barraBuscar = request.getParameter("txtBuscar");
                     listaEmp = empleadoDAO.barraBusqueda(barraBuscar);
                     request.setAttribute("empleados", listaEmp);
-                    break;
                     request.setAttribute("CargoEmpleado", listaEmp);
                 break;
                 case "Cancelar":
@@ -303,7 +299,7 @@ public class Controlador extends HttpServlet {
                     break;
             }
             request.getRequestDispatcher("Empleado.jsp").forward(request, response);
-        } else if (menu.equals("Prestamo")) {
+        
 
         } else if (menu.equals("Cliente")) {
             request.getRequestDispatcher("Empleado.jsp").forward(request,response);
@@ -376,7 +372,6 @@ public class Controlador extends HttpServlet {
                     barraBuscar = request.getParameter("txtBuscar");
                     listaPres = prestamosDAO.barraBusqueda(barraBuscar);
                     request.setAttribute("Prestamo", listaPres);
-                break;
                     request.getRequestDispatcher("Controlador?menu=Empleado&accion=Listar").forward(request, response);
                     break;
                 
