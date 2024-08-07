@@ -22,6 +22,12 @@ import modelo.TipoCuenta;
 import modelo.TipoCuentaDAO;
 import modelo.Clientes;
 import modelo.ClienteDAO;
+import modelo.DetalleCuenta;
+import modelo.DetalleCuentaDAO;
+import modelo.Seguro;
+import modelo.SeguroDAO;
+import modelo.Sucursales;
+import modelo.SucursalesDAO;
 /**
  *
  * @author neryd
@@ -29,7 +35,13 @@ import modelo.ClienteDAO;
 public class Controlador extends HttpServlet {
     Empleado empleado = new Empleado();
     EmpleadoDAO empleadoDAO = new EmpleadoDAO();
+    
     CargoEmpleadoDAO cargoEmpleadoDAO = new CargoEmpleadoDAO();
+    
+    Seguro seguro = new Seguro();
+    SeguroDAO seguroDAO = new SeguroDAO();
+    int numSeguro;
+    
     Prestamos prestamos = new Prestamos();
     PrestamosDAO prestamosDAO = new PrestamosDAO();
     
@@ -37,15 +49,28 @@ public class Controlador extends HttpServlet {
     TipoCuentaDAO tipoCuentaDAO = new TipoCuentaDAO();
     
     Clientes cliente = new Clientes();
-    ClienteDAO clietneDao = new ClienteDAO();
+    ClienteDAO clienteDao = new ClienteDAO();
     
+    DetalleCuenta detalleCuenta = new DetalleCuenta();
+    DetalleCuentaDAO detalleCuentaDAO = new DetalleCuentaDAO();
+    int codDetalleCuenta;
+    
+    Sucursales sucursal = new Sucursales();
+    SucursalesDAO sucursalDAO = new SucursalesDAO();
+    int codSucursal;
+    
+    int numeroSeguro;
+    int numSeg;
     int codCli;
     int codigoCargoEmpleado;
     double salario;
     int codigoEmpleado;
     int codPrestamos;
+    double montoAsegurado;
+    double primaMensual;
     String barraBuscar;
     List listaEmp;
+    List listaSuc;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -199,7 +224,7 @@ public class Controlador extends HttpServlet {
         }else if (menu.equals("Cliente")){
             switch (accion) {
                 case "Listar":
-                    List listaClientes = clietneDao.listar();
+                    List listaClientes = clienteDao.listar();
                     List listaTipoCuenta = tipoCuentaDAO.listar();
                     request.setAttribute("clientes", listaClientes);
                     request.setAttribute("tipoCuentas", listaTipoCuenta);
@@ -211,7 +236,7 @@ public class Controlador extends HttpServlet {
 
                 case "Editar":
                     codCli = Integer.parseInt(request.getParameter("codigoCliente"));
-                    Clientes cl = clietneDao.listaCodigoClientes(codCli);
+                    Clientes cl = clienteDao.listaCodigoClientes(codCli);
                     request.setAttribute ("empleado", cl) ;
                     request.getRequestDispatcher ("Controlador?menu=Empleado&accion=Listar") . forward(request, response);
                 break;
@@ -225,6 +250,196 @@ public class Controlador extends HttpServlet {
             request.getRequestDispatcher("Cliente.jsp").forward(request, response);
         }else if (menu.equals("Producto")){
             request.getRequestDispatcher("Producto.jsp").forward(request, response);
+        }else if (menu.equals("Seguro")){
+            switch(accion){
+                case "Listar":
+                    List listaSeguro = seguroDAO.listar();
+                    List listaCliente = clienteDao.listar();
+                    request.setAttribute("seguros", listaSeguro);
+                    request.setAttribute("clientesLista", listaCliente);
+                    break;
+                case "Agregar":
+                    String numeroPoliza = request.getParameter("txtNumeroPoliza");
+                    String tipoSeguro = request.getParameter("txtTipoSeguro");
+                    montoAsegurado = Double.parseDouble(request.getParameter("txtMontoAsegurado"));
+                    primaMensual = Double.parseDouble(request.getParameter("txtPrimaMensual"));
+                    String fechaExpiracion = request.getParameter("txtFechaExpiracion");
+                    String estado = request.getParameter("txtEstado");
+                    int codigoCliente = Integer.parseInt(request.getParameter("txtCodigoCliente"));
+                    seguro.setNumeroPoliza(numeroPoliza);
+                    seguro.setTipoSeguro(tipoSeguro);
+                    seguro.setMontoAsegurado(montoAsegurado);
+                    seguro.setPrimaMensual(primaMensual);
+                    seguro.setFechaExpiracion(fechaExpiracion);
+                    seguro.setEstado(estado);
+                    seguro.setCodigoCliente(codigoCliente);
+                    seguroDAO.agregar(seguro);
+                    request.getRequestDispatcher("Controlador?menu=Seguro&accion=Listar").forward(request, response);
+                    break;
+                case "Editar":
+                    numSeguro = Integer.parseInt(request.getParameter("numeroSeguro"));
+                    Seguro s = seguroDAO.listarNumeroSeguro(numSeguro);
+                    request.setAttribute("seguro", s);
+                    request.getRequestDispatcher("Controlador?menu=Seguro&accion=Listar").forward(request, response);
+                    break;
+                case "Actualizar":
+                    String numPo = request.getParameter("txtNumeroPoliza");
+                    String tipSeg = request.getParameter("txtTipoSeguro");
+                    montoAsegurado = Double.parseDouble(request.getParameter("txtMontoAsegurado"));
+                    primaMensual = Double.parseDouble(request.getParameter("txtPrimaMensual"));
+                    String fechEx = request.getParameter("txtFechaExpiracion");
+                    String estad = request.getParameter("txtEstado");
+                    seguro.setNumeroPoliza(numPo);
+                    seguro.setTipoSeguro(tipSeg);
+                    seguro.setMontoAsegurado(montoAsegurado);
+                    seguro.setPrimaMensual(primaMensual);
+                    seguro.setFechaExpiracion(fechEx);
+                    seguro.setEstado(estad);
+                    seguro.setNumeroSeguro(numeroSeguro);
+                    seguroDAO.actualizar(seguro);
+                    request.getRequestDispatcher("Controlador?menu=Seguro&accion=Listar").forward(request, response);
+                    break;
+                case "Eliminar":
+                    numSeguro = Integer.parseInt(request.getParameter("numeroSeguro"));
+                    seguroDAO.eliminar(numSeguro);
+                    request.getRequestDispatcher("Controlador?menu=Seguro&accion=Listar").forward(request, response);
+                    break;
+                    
+            }
+            request.getRequestDispatcher("Seguro.jsp").forward(request, response);
+        }else if (menu.equals("Sucursal")){
+            switch(accion){
+                case "Listar":
+                    List listaSucursal = sucursalDAO.listar();
+                    List listaEmpleado = empleadoDAO.listar();
+                    request.setAttribute("sucursales", listaSucursal);
+                    request.setAttribute("empleadoLista", listaEmpleado);
+                    break;
+                case "Agregar":
+                    String nombreSucursal = request.getParameter("txtNombreSucursal");
+                    String direccionSucursal = request.getParameter("txtDireccionSucursal");
+                    String telefono = request.getParameter("txtTelefono");
+                    String correoSucursal = request.getParameter("txtCorreoSucursal");
+                    String estado = request.getParameter("txtEstado");
+                    int codigoEmpleado = Integer.parseInt(request.getParameter("txtCodigoEmpleado"));
+                    sucursal.setNombreSucursal(nombreSucursal);
+                    sucursal.setDireccionSucursal(direccionSucursal);
+                    sucursal.setTelefono(telefono);
+                    sucursal.setCorreoSucursal(correoSucursal);
+                    sucursal.setEstado(estado);
+                    sucursal.setCodigoEmpleado(codigoEmpleado);
+                    sucursalDAO.agregar(sucursal);
+                    request.getRequestDispatcher("Controlador?menu=Sucursal&accion=Listar").forward(request, response);
+                    break;
+                case "Editar":
+                    codSucursal = Integer.parseInt(request.getParameter("codigoSucursal"));
+                    Sucursales ss = sucursalDAO.listarCodigoSucursales(codSucursal);
+                    request.setAttribute("sucursal", ss);
+                    request.getRequestDispatcher("Controlador?menu=Sucursal&accion=Listar").forward(request, response);
+                    break;
+                case "Actualizar":
+                    String nomSucursal = request.getParameter("txtNombreSucursal");
+                    String direSucursal = request.getParameter("txtDireccionSucursal");
+                    String tele = request.getParameter("txtTelefono");
+                    String corSucursal = request.getParameter("txtCorreoSucursal");
+                    String estad = request.getParameter("txtEstado");
+                    codigoEmpleado = Integer.parseInt(request.getParameter("txtCodigoEmpleado"));
+                    sucursal.setNombreSucursal(nomSucursal);
+                    sucursal.setDireccionSucursal(direSucursal);
+                    sucursal.setTelefono(tele);
+                    sucursal.setCorreoSucursal(corSucursal);
+                    sucursal.setEstado(estad);
+                    sucursal.setCodigoEmpleado(codigoEmpleado);
+                    sucursal.setCodigoSucursal(codSucursal);
+                    sucursalDAO.actualizar(sucursal);
+                    request.getRequestDispatcher("Controlador?menu=Sucursal&accion=Listar").forward(request, response);
+                    break;
+                case "Eliminar":
+                    codSucursal = Integer.parseInt(request.getParameter("codigoSucursal"));
+                    sucursalDAO.eliminar(codSucursal);
+                    request.getRequestDispatcher("Controlador?menu=Sucursal&accion=Listar").forward(request, response);
+                    break;
+                case "Buscar":
+                    barraBuscar = request.getParameter("txtBuscar");
+                    listaSuc = sucursalDAO.barraBusqueda(barraBuscar);
+                    request.setAttribute("sucursal", listaSuc);
+                break;
+                case "Cancelar":
+                    request.getRequestDispatcher("Controlador?menu=Sucursal&accion=Listar").forward(request, response);
+                break;
+                    
+            }
+            request.getRequestDispatcher("Sucursal.jsp").forward(request, response);
+        }else if (menu.equals("DetalleCuenta")){
+            switch(accion){
+                case "Listar":
+                    List listaDetalleCuenta = detalleCuentaDAO.listar();
+                    List listaCliente = clienteDao.listar();
+                    List listaEmpleado = empleadoDAO.listar();
+                    List listaSucursales = sucursalDAO.listar();
+                    request.setAttribute("detalleCuentas", listaDetalleCuenta);
+                    request.setAttribute("clienteLista", listaCliente);
+                    request.setAttribute("empleadoLista", listaEmpleado);
+                    request.setAttribute("sucursalLista", listaSucursales);
+                    break;
+                case "Agregar":
+                    String fechaDetalle = request.getParameter("txtFechaDetalle");
+                    String tipoOperacion = request.getParameter("txtTipoOperacion");
+                    String estado = request.getParameter("txtEstado");
+                    int codigoCliente = Integer.parseInt(request.getParameter("txtCodigoCliente"));
+                    int codigoEmpleado = Integer.parseInt(request.getParameter("txtCodigoEmpleado"));
+                    int codigoSucursal = Integer.parseInt(request.getParameter("txtCodigoSucursal"));
+                    detalleCuenta.setFechaDetalle(fechaDetalle);
+                    detalleCuenta.setTipoOperacion(tipoOperacion);
+                    detalleCuenta.setEstadoCuenta(estado);
+                    detalleCuenta.setCodigoCliente(codigoCliente);
+                    detalleCuenta.setCodigoEmpleado(codigoEmpleado);
+                    detalleCuenta.setCodigoSucursal(codigoSucursal);
+                    detalleCuenta.setCodigoDetalleCuenta(codDetalleCuenta);
+                    detalleCuentaDAO.agregar(detalleCuenta);
+                    request.getRequestDispatcher("Controlador?menu=DetalleCuenta&accion=Listar").forward(request, response);
+                    break;
+                    case "Editar":
+                    codDetalleCuenta = Integer.parseInt(request.getParameter("codigoDetalleCuenta"));
+                    DetalleCuenta dc = detalleCuentaDAO.listarCodigoDetalleCuenta(codDetalleCuenta);
+                    request.setAttribute("detalleCuenta", dc);
+                    request.getRequestDispatcher("Controlador?menu=DetalleCuenta&accion=Listar").forward(request, response);
+                    break;
+                    case "Actualizar":
+                    String fecDetalle = request.getParameter("txtFechaDetalle");
+                    String tipOpe = request.getParameter("txtTipoOperacion");
+                    String estad = request.getParameter("txtEstado");
+                    codigoCliente = Integer.parseInt(request.getParameter("txtCodigoCliente"));
+                    codigoEmpleado = Integer.parseInt(request.getParameter("txtCodigoEmpleado"));
+                    codigoSucursal = Integer.parseInt(request.getParameter("txtCodigoSucursal"));
+                    detalleCuenta.setFechaDetalle(fecDetalle);
+                    detalleCuenta.setTipoOperacion(tipOpe);
+                    detalleCuenta.setEstadoCuenta(estad);
+                    detalleCuenta.setCodigoCliente(codigoCliente);
+                    detalleCuenta.setCodigoEmpleado(codigoEmpleado);
+                    detalleCuenta.setCodigoSucursal(codigoSucursal);
+                    detalleCuenta.setCodigoDetalleCuenta(codDetalleCuenta);
+                    detalleCuentaDAO.actualizar(detalleCuenta);
+                    request.getRequestDispatcher("Controlador?menu=DetalleCuenta&accion=Listar").forward(request, response);
+                    break;
+                    case "Eliminar":
+                    codDetalleCuenta = Integer.parseInt(request.getParameter("codigoDetalleCuenta"));
+                    detalleCuentaDAO.eliminar(codDetalleCuenta);
+                    request.getRequestDispatcher("Controlador?menu=DetalleCuenta&accion=Listar").forward(request, response);
+                    break;
+                    case "Buscar":
+                    barraBuscar = request.getParameter("txtBuscar");
+                    listaSuc = sucursalDAO.barraBusqueda(barraBuscar);
+                    request.setAttribute("sucursal", listaSuc);
+                    break;
+                    case "Cancelar":
+                        request.getRequestDispatcher("Controlador?menu=DetalleCuenta"
+                                + ""
+                                + ""
+                                + "&accion=Listar").forward(request, response);
+                    break;
+            }
+            request.getRequestDispatcher("DetalleCuenta.jsp").forward(request, response);
         }else if (menu.equals("NuevaVenta")){
             request.getRequestDispatcher("RegistrarVenta.jsp").forward(request, response);
         }
