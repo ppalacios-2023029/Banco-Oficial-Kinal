@@ -62,8 +62,8 @@ public class Controlador extends HttpServlet {
     SeguroDAO seguroDAO = new SeguroDAO();
     int numSeguro;
     
-    Prestamos prestamos = new Prestamos();
-    PrestamosDAO prestamosDAO = new PrestamosDAO();
+    Prestamo prestamo = new Prestamo();
+    PrestamoDAO prestamoDAO = new PrestamoDAO();
     
     TipoCuenta tipoCuenta = new TipoCuenta();
     TipoCuentaDAO tipoCuentaDAO = new TipoCuentaDAO();
@@ -82,16 +82,15 @@ public class Controlador extends HttpServlet {
     int numSeg;
     int codCli;
     // -- Cambios de Tipo Cuenta --
-    TipoCuenta tipoCuenta = new TipoCuenta();
-    TipoCuentaDAO tipoCuentaDAO = new TipoCuentaDAO();
+    TipoCuenta tipoCuentas = new TipoCuenta();
+    TipoCuentaDAO tipoCuentasDAO = new TipoCuentaDAO();
     double saldoMin;
     double interes;
     double impuestos;
     int codigoTipoCuenta;
     List listaTipoC;
     // ----------------------------
-    Prestamos prestamos = new Prestamos();
-    PrestamosDAO prestamosDAO = new PrestamosDAO();
+
     int codigoCargoEmpleado;
     double salario;
     int codigoEmpleado;
@@ -350,7 +349,7 @@ public class Controlador extends HttpServlet {
             switch(accion){
                 case "Listar":
                     List listaPrestamo = prestamosDAO.listar();
-                    List listaClientes = clietneDao.listar();
+                    List listaClientes = clienteDao.listar();
                     request.setAttribute("prestamos", listaPrestamo);
                     request.setAttribute("clientes", listaClientes);
                 break;
@@ -687,6 +686,7 @@ public class Controlador extends HttpServlet {
                     throw new ServletException("Accion no reconocida");
             }
             request.getRequestDispatcher("Tarjeta.jsp").forward(request, response);
+        
         }else if (menu.equals("Producto")){
             request.getRequestDispatcher("Producto.jsp").forward(request, response);
         } else if (menu.equals("NuevaVenta")) {

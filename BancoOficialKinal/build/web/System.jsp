@@ -125,7 +125,6 @@
         </li>
         <li id="aperturaCuenta">
           <a aria-current="page" href="#" target="myFrame">
-          <a aria-current="page" href="Controlador?menu=DetalleCuenta&accion=Listar" target="myFrame">
             <i class="ri-account-circle-fill"></i>
             <span class="link_name">Vista General</span>
           </a>
