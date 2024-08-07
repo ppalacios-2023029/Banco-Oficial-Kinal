@@ -84,7 +84,7 @@
             <span><a class="link_name" href="#">Tipo</a></span>
             <span><a aria-current="page" href="Controlador?menu=Seguro&accion=Listar" target="myFrame">Seguros</a></span>
             <span><a href="#">Targetas</a></span>
-            <span><a href="#">Transacciones</a></span>
+            <span><a aria-current="page" href="Controlador?menu=Transaccion&accion=Listar" target="myFrame">Transacciones</a></span>
             <span><a aria-current="page" href="Controlador?menu=TipoCuenta&accion=Listar" target="myFrame">Tipos de Cuentas</a></span>
           </ul>
         </li>
@@ -109,7 +109,7 @@
           </div>
           <ul class="sub-menu">
             <span><a class="link_name" href="#">Seguro</a></span>
-            <span><a href="#">Sucursales</a></span>
+            <span><a aria-current="page" href="Controlador?menu=Sucursal&accion=Listar" target="myFrame">Sucursales</a></span>
             <span><a aria-current="page" href="Controlador?menu=CargoEmpleado&accion=Listar" target="myFrame">Cargos</a></span>
             <span><a aria-current="page" href="Controlador?menu=NuevaTarjeta&accion=Listar" target="myFrame">Crear Targeta</a></span>
           </ul>
@@ -124,9 +124,9 @@
           </div>
         </li>
         <li id="aperturaCuenta">
-          <a aria-current="page" href="#" target="myFrame">
+          <a aria-current="page" href="Controlador?menu=DetalleCuenta&accion=Listar" target="myFrame">
             <i class="ri-account-circle-fill"></i>
-            <span class="link_name">Vista General</span>
+            <span class="link_name">Detalle Cuenta</span>
           </a>
           <div class="sub-menu blank">
             <span><a class="link_name" href="#">Apertura de cuenta</a></span>

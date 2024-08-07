@@ -72,8 +72,6 @@ public class Controlador extends HttpServlet {
     SeguroDAO seguroDAO = new SeguroDAO();
     int numSeguro;
     
-    Prestamos prestamos = new Prestamos();
-    PrestamosDAO prestamosDAO = new PrestamosDAO();
     
     TipoCuenta tipoCuenta = new TipoCuenta();
     TipoCuentaDAO tipoCuentaDAO = new TipoCuentaDAO();
@@ -90,18 +88,6 @@ public class Controlador extends HttpServlet {
     List listaTipoC;
     // ----------------------------
     
-    Seguro seguro = new Seguro();
-    SeguroDAO seguroDAO = new SeguroDAO();
-    int numSeguro;
-    
-    Prestamos prestamos = new Prestamos();
-    PrestamosDAO prestamosDAO = new PrestamosDAO();
-    
-    TipoCuenta tipoCuenta = new TipoCuenta();
-    TipoCuentaDAO tipoCuentaDAO = new TipoCuentaDAO();
-    
-    Clientes cliente = new Clientes();
-    ClienteDAO clienteDao = new ClienteDAO();
     
     Sucursales sucursal = new Sucursales();
     SucursalesDAO sucursalDAO = new SucursalesDAO();
@@ -113,19 +99,12 @@ public class Controlador extends HttpServlet {
     DetalleCuentaDAO detalleCuentaDAO = new DetalleCuentaDAO();
     int codDetalleCuenta;
     
-    Sucursales sucursal = new Sucursales();
-    SucursalesDAO sucursalDAO = new SucursalesDAO();
-    int codSucursal;
     
-    int numeroSeguro;
-    int numSeg;
-    int codCli;
+
     int codigoCargoEmpleado;
     double salario;
     int codigoEmpleado;
     int codPrestamos;
-    double montoAsegurado;
-    double primaMensual;
     double montoAsegurado;
     double primaMensual;
     String barraBuscar;
@@ -152,7 +131,6 @@ public class Controlador extends HttpServlet {
     double monto;
     List listaTra;    
     
-    List listaSuc;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -391,7 +369,7 @@ public class Controlador extends HttpServlet {
             switch(accion){
                 case "Listar":
                     List listaPrestamo = prestamosDAO.listar();
-                    List listaClientes = clietneDao.listar();
+                    List listaClientes = clienteDao.listar();
                     request.setAttribute("prestamos", listaPrestamo);
                     request.setAttribute("clientes", listaClientes);
                 break;

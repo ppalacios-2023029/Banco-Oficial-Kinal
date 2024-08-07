@@ -40,21 +40,18 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach var="empleado" items="${empleados}">
+                            <c:forEach var="detalleCuenta" items="${detalleCuentas}">
                                 <tr class="filas">
-                                    <td>${empleado.getCodigoEmpleado()}</td>
-                                    <td>${empleado.getNombreEmpleado()}</td>
-                                    <td>${empleado.getApellidoEmpleado()}</td>
-                                    <td>${empleado.getUsuario()}</td>
-                                    <td>${empleado.getContrasena()}</td>
-                                    <td>${empleado.getCargo()}</td>
-                                    <td>${empleado.getSalario()}</td>
-                                    <td>Oficina ${empleado.getOficina()}</td>
-                                    <td>${empleado.getEstado()}</td>
-                                    <td>${empleado.getCodigoCargoEmpleado()}</td>
+                                    <td>${detalleCuenta.getCodigoDetalleCuenta()}</td>
+                                    <td>${detalleCuenta.getFechaDetalle()}</td>
+                                    <td>${detalleCuenta.getTipoOperacion()}</td>
+                                    <td>${detalleCuenta.getEstadoCuenta()}</td>
+                                    <td>${detalleCuenta.getCodigoCliente()}</td>
+                                    <td>${detalleCuenta.getCodigoEmpleado()}</td>
+                                    <td>${detalleCuenta.getCodigoSucursal()}</td>
                                     <td class="controles_table">
-                                        <a class="btn btnEditar" href="Controlador?menu=Empleado&accion=Editar&codigoEmpleado=${empleado.getCodigoEmpleado()}">Editar</a>
-                                        <a class="btn btnEliminar" href="Controlador?menu=Empleado&accion=Eliminar&codigoEmpleado=${empleado.getCodigoEmpleado()}">Eliminar</a>
+                                        <a class="btn btnEditar" href="Controlador?menu=DetalleCuenta&accion=Editar&codigoDetalleCuenta=${detalleCuenta.getCodigoDetalleCuenta()}">Editar</a>
+                                        <a class="btn btnEliminar" href="Controlador?menu=DetalleCuenta&accion=Eliminar&codigoDetalleCuenta=${detalleCuenta.getCodigoDetalleCuenta()}">Eliminar</a>
                                     </td>
 
                                 </tr>
@@ -64,7 +61,7 @@
                     </table>
                 </div>
                 <div class="card-body">
-                    <form action="Controlador?menu=Empleado" method="POST">
+                    <form action="Controlador?menu=DetalleCuenta" method="POST">
                         <div class="botones">
                             <div class="btn-group">
                                 <input type="submit" name="accion" value="Agregar" class="btn btn-agregar">
@@ -77,56 +74,61 @@
                                 <p class="TituloAgregar__subtitulos1">Agregar</p>
                             </div>
                             <div class="form-group">
-                                <p class="TituloAgregar__subtitulos2">Nombre Empleado</p>
-                                <input type="text" value="${empleado.getNombreEmpleado()}" name="txtNombreEmpleado" class="form-control" placeholder="Nombre Empleado">
+                                <p class="TituloAgregar__subtitulos2">Fecha Detalle</p>
+                                <input type="text" value="${detalleCuenta.getFechaDetalle()}" name="txtFechaDetalle" class="form-control" placeholder="Fecha Detalle">
                             </div>
                             <div class="form-group">
-                                <p class="TituloAgregar__subtitulos2">Apellido Empleado</p>
-                                <input type="text" value="${empleado.getApellidoEmpleado()}" name="txtApellidoEmpleado" class="form-control" placeholder="Apellido Empleado">
-                            </div>
-                            <div class="form-group">
-                                <p class="TituloAgregar__subtitulos2">Usuario</p>
-                                <input type="text" value="${empleado.getUsuario()}" name="txtUsuario" class="form-control" placeholder="Usuario">
-                            </div>
-                            <div class="form-group">
-                                <p class="TituloAgregar__subtitulos2">Contraseña</p>
-                                <input type="text" value="${empleado.getContrasena()}" name="txtContrasena" class="form-control" placeholder="Contraseña">
-                            </div>
-                            <div class="form-group">
-                                <p class="TituloAgregar__subtitulos2">Cargo</p>
-                                <input type="text" value="${empleado.getCargo()}" name="txtCargo" class="form-control" placeholder="Cargo">
-                            </div>
-                            <div class="form-group">
-                                <p class="TituloAgregar__subtitulos2">Salario</p>
-                                <input type="text" value="${empleado.getSalario()}" name="txtSalario" class="form-control" placeholder="Salario">
-                            </div>
-                            <div class="form-group">
-                                <p class="TituloAgregar__subtitulos2">Oficina</p>
-                                <input type="number" id="quantity" name="txtOficina" min="100" max="765" value="${empleado.getOficina()}" class="sl-foreign input-number">
+                                <p class="TituloAgregar__subtitulos2">Tipo Operacion</p>
+                                <input type="text" value="${detalleCuenta.getTipoOperacion()}" name="txtTipoOperacion" class="form-control" placeholder="Tipo Operacion">
                             </div>
                             <div class="form-group">
                                 <p class="TituloAgregar__subtitulos2">Estado</p>
                                 <select class="sl-foreign" name="txtEstado">
                                     <option selected>Elija una opción</option>
-                                    <option value="1" ${empleado.getEstado() == '1' ? 'selected' : ''}>Activo</option>
-                                    <option value="0" ${empleado.getEstado() == '0' ? 'selected' : ''}>Inactivo</option>
+                                    <option value="1" ${detalleCuenta.getEstadoCuenta() == '1' ? 'selected' : ''}>Confirmado</option>
+                                    <option value="0" ${detalleCuenta.getEstadoCuenta() == '0' ? 'selected' : ''}>Pendiente</option>
                                 </select>
 
                             </div>
                             <div class="form-group">
-                                <p class="TituloAgregar__subtitulos2">Cargo Empleado</p>
-                                <select class="sl-foreign" name="ddlCargoEmpleado">
+                                <p class="TituloAgregar__subtitulos2">Cliente</p>
+                                <select class="sl-foreign" name="txtCodigoCliente">
                                     <option selected>Elija una opción</option> <!-- Mantén la opción predeterminada deshabilitada -->
-                                    <c:forEach var="cargoEmpleado" items="${cargoEmpleados}">
-                                        <option value="${cargoEmpleado.getCodigoCargoEmpleado()}"
-                                                ${cargoEmpleado.getCodigoCargoEmpleado() == empleado.getCodigoCargoEmpleado() ? 'selected' : ''}>
-                                            ${cargoEmpleado.getNombreCargo()}
+                                    <c:forEach var="clienteL" items="${clienteLista}">
+                                        <option value="${clienteL.getCodigoCliente()}"
+                                                ${clienteL.getCodigoCliente() == detalleCuenta.getCodigoCliente() ? 'selected' : ''}>
+                                            ${clienteL.getNombreCliente()}
+                                            ${clienteL.getApellidoCliente()}
+                                        </option>
+                                    </c:forEach>
+                                </select>
+                            </div> 
+                            <div class="form-group">
+                                <p class="TituloAgregar__subtitulos2">Empleado</p>
+                                <select class="sl-foreign" name="txtCodigoEmpleado">
+                                    <option selected>Elija una opción</option> <!-- Mantén la opción predeterminada deshabilitada -->
+                                    <c:forEach var="empleadoL" items="${empleadoLista}">
+                                        <option value="${empleadoL.getCodigoEmpleado()}"
+                                                ${empleadoL.getCodigoEmpleado() == detalleCuenta.getCodigoEmpleado() ? 'selected' : ''}>
+                                            ${empleadoL.getNombreEmpleado()}
+                                            ${empleadoL.getApellidoEmpleado()}
+                                        </option>
+                                    </c:forEach>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <p class="TituloAgregar__subtitulos2">Sucursal</p>
+                                <select class="sl-foreign" name="txtCodigoSucursal">
+                                    <option selected>Elija una opción</option> <!-- Mantén la opción predeterminada deshabilitada -->
+                                    <c:forEach var="sucursalL" items="${sucursalLista}">
+                                        <option value="${sucursalL.getCodigoSucursal()}"
+                                                ${sucursalL.getCodigoSucursal() == detalleCuenta.getCodigoSucursal() ? 'selected' : ''}>
+                                            ${sucursalL.getNombreSucursal()}
                                         </option>
                                     </c:forEach>
                                 </select>
                             </div>
                         </div>
-
                     </form>
                 </div>
             </div>
