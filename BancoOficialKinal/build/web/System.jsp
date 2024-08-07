@@ -51,12 +51,12 @@
         </li>
 
         <li id="aperturaCuenta">
-          <a href="Controlador?menu=Cliente&accion=Listar" target="myframe">
+          <a aria-current="page" href="Controlador?menu=Cliente&accion=Listar" target="myFrame">
             <i class="ri-account-circle-fill"></i>
             <span class="link_name">Apertura de cuenta</span>
           </a>
           <div class="sub-menu blank">
-            <span><a class="link_name" href="Controlador?menu=Cliente&accion=Listar" target="myframe">Apertura de cuenta</a></span>
+            <span><a class="link_name" aria-current="page" href="Controlador?menu=Cliente&accion=Listar" target="myFrame">Apertura de cuenta</a></span>
           </div>
         </li>
         
@@ -82,8 +82,8 @@
           </div>
           <ul class="sub-menu">
             <span><a class="link_name" href="#">Tipo</a></span>
-            <span><a href="#">Seguros</a></span>
-            <span><a href="#">Targetas</a></span>
+            <span><a aria-current="page" href="Controlador?menu=Seguro&accion=Listar" target="myFrame">Seguros</a></span>
+            <span><a aria-current="page" href="Controlador?menu=Tarjeta&accion=Listar" target="myFrame">Tarjetas</a></span>
             <span><a href="#">Transacciones</a></span>
             <span><a href="#">Tipos de Cuentas</a></span>
           </ul>
@@ -109,13 +109,13 @@
           </div>
           <ul class="sub-menu">
             <span><a class="link_name" href="#">Seguro</a></span>
-            <span><a href="#">Sucursales</a></span>
+            <span><a aria-current="page" href="Controlador?menu=Sucursal&accion=Listar" target="myFrame">Sucursales</a></span>
             <span><a href="#">Cargos</a></span>
             <span><a href="#">Dribbble</a></span>
           </ul>
         </li>
         <li id="aperturaCuenta">
-          <a aria-current="page" href="Controlador?menu=Empleado&accion=Listar" target="myFrame">
+          <a aria-current="page" href="Controlador?menu=DetalleCuenta&accion=Listar" target="myFrame">
             <i class="ri-account-circle-fill"></i>
             <span class="link_name">Vista General</span>
           </a>

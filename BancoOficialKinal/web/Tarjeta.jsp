@@ -1,14 +1,8 @@
-<%-- 
-    Document   : Tarjeta
-    Created on : 6/08/2024, 01:07:39 PM
-    Author     : informatica
---%>
-
+<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
-<%@page contentType="text/html" pageEncoding="UTF-8"%> 
 
 <!DOCTYPE html> 
-<html lang="en"> 
+<html lang="es"> 
     <head> 
         <meta charset="UTF-8"> 
         <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
@@ -22,7 +16,7 @@
         <div class="d-flex"> 
             <div class="col-sm-8"> 
                 <div class="TablaCont"> 
-                    <form action="Controlador?menu=Tarjeta" method="POST"> 
+                    <form action="Controlador?menu=Tarjeta" method="POST" accept-charset="UTF-8"> 
                         <div class="header_table"> 
                             <input type="submit" name="accion" value="Buscar" class="btn-Buscar"> 
                             <input type="text" value="" name="txtBuscar" class="textSearch" placeholder="Buscar"> 
@@ -63,7 +57,7 @@
                     </table> 
                 </div> 
                 <div class="card-body"> 
-                    <form action="Controlador?menu=Tarjeta" method="POST"> 
+                    <form action="Controlador?menu=Tarjeta" method="POST" accept-charset="UTF-8"> 
                         <div class="botones"> 
                             <div class="btn-group"> 
                                 <input type="submit" name="accion" value="Agregar" class="btn btn-agregar"> 
@@ -111,11 +105,13 @@
                                 <p class="TituloAgregar__subtitulos2">Código de Cliente</p> 
                                 <select class="sl-foreign" name="ddlCodigoCliente"> 
                                     <option selected>Elija una opción</option> 
-                                    <c:forEach var="cliente" items="${clientes}"> 
-                                        <option value="${cliente.getCodigoCliente()}" ${cliente.getCodigoCliente() == tarjeta.getCodigoCliente() ? 'selected' : ''}> 
-                                            ${cliente.getNombreCliente()} 
-                                        </option> 
-                                    </c:forEach> 
+                                    <c:forEach var="clientesL" items="${clientesLista}">
+                                        <option value="${clientesL.getCodigoCliente()}"
+                                                ${clientesL.getCodigoCliente() == tarjeta.getCodigoCliente() ? 'selected' : ''}>
+                                            ${clientesL.getNombreCliente()}
+                                            ${clientesL.getApellidoCliente()}
+                                        </option>
+                                    </c:forEach>
                                 </select> 
                             </div> 
                         </div> 
@@ -125,4 +121,3 @@
         </div> 
     </body> 
 </html>
-

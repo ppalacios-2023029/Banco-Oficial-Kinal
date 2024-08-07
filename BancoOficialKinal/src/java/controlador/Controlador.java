@@ -23,6 +23,10 @@ import modelo.TipoCuenta;
 import modelo.TipoCuentaDAO;
 import modelo.Clientes;
 import modelo.ClienteDAO;
+import modelo.Seguro;
+import modelo.SeguroDAO;
+import modelo.Sucursales;
+import modelo.SucursalesDAO;
 import modelo.Tarjeta;
 import modelo.TarjetaDAO;
 /**
@@ -32,7 +36,13 @@ import modelo.TarjetaDAO;
 public class Controlador extends HttpServlet {
     Empleado empleado = new Empleado();
     EmpleadoDAO empleadoDAO = new EmpleadoDAO();
+    
     CargoEmpleadoDAO cargoEmpleadoDAO = new CargoEmpleadoDAO();
+    
+    Seguro seguro = new Seguro();
+    SeguroDAO seguroDAO = new SeguroDAO();
+    int numSeguro;
+    
     Prestamos prestamos = new Prestamos();
     PrestamosDAO prestamosDAO = new PrestamosDAO();
     
@@ -40,18 +50,27 @@ public class Controlador extends HttpServlet {
     TipoCuentaDAO tipoCuentaDAO = new TipoCuentaDAO();
     
     Clientes cliente = new Clientes();
-    ClienteDAO clietneDao = new ClienteDAO();
+    ClienteDAO clienteDao = new ClienteDAO();
     
     TarjetaDAO tarjetaDAO = new TarjetaDAO();
-    Tarjeta tarjeta = new Tarjeta();
+    Tarjeta tarjeta = new Tarjeta();    
     
+    Sucursales sucursal = new Sucursales();
+    SucursalesDAO sucursalDAO = new SucursalesDAO();
+    int codSucursal;
+    
+    int numeroSeguro;
+    int numSeg;
     int codCli;
     int codigoCargoEmpleado;
     double salario;
     int codigoEmpleado;
     int codPrestamos;
+    double montoAsegurado;
+    double primaMensual;
     String barraBuscar;
     List listaEmp;
+    List listaSuc;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -205,7 +224,7 @@ public class Controlador extends HttpServlet {
         }else if (menu.equals("Cliente")){
             switch (accion) {
                 case "Listar":
-                    List listaClientes = clietneDao.listar();
+                    List listaClientes = clienteDao.listar();
                     List listaTipoCuenta = tipoCuentaDAO.listar();
                     request.setAttribute("clientes", listaClientes);
                     request.setAttribute("tipoCuentas", listaTipoCuenta);
@@ -217,7 +236,7 @@ public class Controlador extends HttpServlet {
 
                 case "Editar":
                     codCli = Integer.parseInt(request.getParameter("codigoCliente"));
-                    Clientes cl = clietneDao.listaCodigoClientes(codCli);
+                    Clientes cl = clienteDao.listaCodigoClientes(codCli);
                     request.setAttribute ("empleado", cl) ;
                     request.getRequestDispatcher ("Controlador?menu=Empleado&accion=Listar") . forward(request, response);
                 break;
@@ -234,7 +253,9 @@ public class Controlador extends HttpServlet {
                 case "Listar":
                     List<Tarjeta> listaTarjeta = tarjetaDAO.listar();
                     request.setAttribute("tarjetas", listaTarjeta);
-                    break;
+                    List<Clientes> listaCliente = clienteDao.listar();
+                    request.setAttribute("clientesLista", listaCliente);
+                break;
 
                 case "Agregar":
                     try {
@@ -265,58 +286,78 @@ public class Controlador extends HttpServlet {
                         request.getRequestDispatcher("Controlador?menu=Tarjeta&accion=Listar").forward(request, response);
                     } catch (Exception e) {
                         e.printStackTrace();
+                        request.setAttribute("error", "Error al agregar la tarjeta: " + e.getMessage());
                     }
                     break;
 
                 case "Editar":
-                    String numeroTarjetaEditar = request.getParameter("numeroTarjeta");
-                    Tarjeta tr = tarjetaDAO.listarNumeroTarjeta(numeroTarjetaEditar);
-                    request.setAttribute("tarjeta", tr);
-                    request.getRequestDispatcher("Controlador?menu=Tarjeta&accion=Listar").forward(request, response);
+                    try {
+                        String numeroTarjetaEditar = request.getParameter("numeroTarjeta");
+                        Tarjeta tr = tarjetaDAO.listarNumeroTarjeta(numeroTarjetaEditar);
+                        request.setAttribute("tarjeta", tr);
+                        request.getRequestDispatcher("Controlador?menu=Tarjeta&accion=Listar").forward(request, response);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        request.setAttribute("error", "Error al editar la tarjeta: " + e.getMessage());
+                    }
                     break;
 
                 case "Actualizar":
                     try {
+                        // Obtén la tarjeta actual para preservar PK y FK
                         String numeroTarjetaAct = request.getParameter("txtNumeroTarjeta");
+                        Tarjeta tarjetaActual = tarjetaDAO.listarNumeroTarjeta(numeroTarjetaAct);
+
                         String tipoTar = request.getParameter("txtTipoTarjeta");
                         String cvc = request.getParameter("txtCVC");
                         String fechaVen = request.getParameter("txtFechaVencimiento");
                         String fechaEmi = request.getParameter("txtFechaEmision");
                         double limiteCred = Double.parseDouble(request.getParameter("txtLimiteDeCredito"));
                         String est = request.getParameter("txtEstado");
-                        int codigoClienteAct = Integer.parseInt(request.getParameter("ddlCodigoCliente"));
+                        int codigoClienteAct = tarjetaActual.getCodigoCliente();  // Mantén el código de cliente actual
 
                         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                         Date parsedFechaVencimiento = format.parse(fechaVen);
                         Date parsedFechaEmision = format.parse(fechaEmi);
 
                         Tarjeta tarjeta = new Tarjeta();
-                        tarjeta.setNumeroTarjeta(numeroTarjetaAct);
+                        tarjeta.setNumeroTarjeta(numeroTarjetaAct);  // Mantén el número de tarjeta actual
                         tarjeta.setTipoTarjeta(tipoTar);
                         tarjeta.setCVC(cvc);
                         tarjeta.setFechaVencimiento(new java.sql.Date(parsedFechaVencimiento.getTime()));
                         tarjeta.setFechaEmision(new java.sql.Date(parsedFechaEmision.getTime()));
                         tarjeta.setLimiteDeCredito(limiteCred);
                         tarjeta.setEstado(est);
-                        tarjeta.setCodigoCliente(codigoClienteAct);
+                        tarjeta.setCodigoCliente(codigoClienteAct);  // Mantén el código de cliente actual
 
                         tarjetaDAO.actualizar(tarjeta);
                         request.getRequestDispatcher("Controlador?menu=Tarjeta&accion=Listar").forward(request, response);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    break;
+                break;
 
                 case "Eliminar":
-                    String numTarjetaEliminar = request.getParameter("numeroTarjeta");
-                    tarjetaDAO.eliminar(numTarjetaEliminar);
-                    request.getRequestDispatcher("Controlador?menu=Tarjeta&accion=Listar").forward(request, response);
+                    try {
+                        String numTarjetaEliminar = request.getParameter("numeroTarjeta");
+                        tarjetaDAO.eliminar(numTarjetaEliminar);
+                        request.getRequestDispatcher("Controlador?menu=Tarjeta&accion=Listar").forward(request, response);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        request.setAttribute("error", "Error al eliminar la tarjeta: " + e.getMessage());
+                    }
                     break;
 
                 case "Buscar":
-                    String barraBuscarTarjeta = request.getParameter("txtBuscar");
-                    Tarjeta tarjetaBuscada = tarjetaDAO.listarNumeroTarjeta(barraBuscarTarjeta);
-                    request.setAttribute("tarjeta", tarjetaBuscada);
+                    try {
+                        String barraBuscarTarjeta = request.getParameter("txtBuscar");
+                        List<Tarjeta> listaTarjetas = tarjetaDAO.barraBusqueda(barraBuscarTarjeta);
+                        request.setAttribute("tarjetas", listaTarjetas);
+                        request.getRequestDispatcher("Tarjeta.jsp").forward(request, response);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        request.setAttribute("error", "Error al buscar la tarjeta: " + e.getMessage());
+                    }
                     break;
 
                 case "Cancelar":
@@ -329,6 +370,126 @@ public class Controlador extends HttpServlet {
             request.getRequestDispatcher("Tarjeta.jsp").forward(request, response);
         }else if (menu.equals("Producto")){
             request.getRequestDispatcher("Producto.jsp").forward(request, response);
+        }else if (menu.equals("Seguro")){
+            switch(accion){
+                case "Listar":
+                    List listaSeguro = seguroDAO.listar();
+                    List listaCliente = clienteDao.listar();
+                    request.setAttribute("seguros", listaSeguro);
+                    request.setAttribute("clientesLista", listaCliente);
+                    break;
+                case "Agregar":
+                    String numeroPoliza = request.getParameter("txtNumeroPoliza");
+                    String tipoSeguro = request.getParameter("txtTipoSeguro");
+                    montoAsegurado = Double.parseDouble(request.getParameter("txtMontoAsegurado"));
+                    primaMensual = Double.parseDouble(request.getParameter("txtPrimaMensual"));
+                    String fechaExpiracion = request.getParameter("txtFechaExpiracion");
+                    String estado = request.getParameter("txtEstado");
+                    int codigoCliente = Integer.parseInt(request.getParameter("txtCodigoCliente"));
+                    seguro.setNumeroPoliza(numeroPoliza);
+                    seguro.setTipoSeguro(tipoSeguro);
+                    seguro.setMontoAsegurado(montoAsegurado);
+                    seguro.setPrimaMensual(primaMensual);
+                    seguro.setFechaExpiracion(fechaExpiracion);
+                    seguro.setEstado(estado);
+                    seguro.setCodigoCliente(codigoCliente);
+                    seguroDAO.agregar(seguro);
+                    request.getRequestDispatcher("Controlador?menu=Seguro&accion=Listar").forward(request, response);
+                    break;
+                case "Editar":
+                    numSeguro = Integer.parseInt(request.getParameter("numeroSeguro"));
+                    Seguro s = seguroDAO.listarNumeroSeguro(numSeguro);
+                    request.setAttribute("seguro", s);
+                    request.getRequestDispatcher("Controlador?menu=Seguro&accion=Listar").forward(request, response);
+                    break;
+                case "Actualizar":
+                    String numPo = request.getParameter("txtNumeroPoliza");
+                    String tipSeg = request.getParameter("txtTipoSeguro");
+                    montoAsegurado = Double.parseDouble(request.getParameter("txtMontoAsegurado"));
+                    primaMensual = Double.parseDouble(request.getParameter("txtPrimaMensual"));
+                    String fechEx = request.getParameter("txtFechaExpiracion");
+                    String estad = request.getParameter("txtEstado");
+                    seguro.setNumeroPoliza(numPo);
+                    seguro.setTipoSeguro(tipSeg);
+                    seguro.setMontoAsegurado(montoAsegurado);
+                    seguro.setPrimaMensual(primaMensual);
+                    seguro.setFechaExpiracion(fechEx);
+                    seguro.setEstado(estad);
+                    seguro.setNumeroSeguro(numeroSeguro);
+                    seguroDAO.actualizar(seguro);
+                    request.getRequestDispatcher("Controlador?menu=Seguro&accion=Listar").forward(request, response);
+                    break;
+                case "Eliminar":
+                    numSeguro = Integer.parseInt(request.getParameter("numeroSeguro"));
+                    seguroDAO.eliminar(numSeguro);
+                    request.getRequestDispatcher("Controlador?menu=Seguro&accion=Listar").forward(request, response);
+                    break;
+                    
+            }
+            request.getRequestDispatcher("Seguro.jsp").forward(request, response);
+        }else if (menu.equals("Sucursal")){
+            switch(accion){
+                case "Listar":
+                    List listaSucursal = sucursalDAO.listar();
+                    List listaEmpleado = empleadoDAO.listar();
+                    request.setAttribute("sucursales", listaSucursal);
+                    request.setAttribute("empleadoLista", listaEmpleado);
+                    break;
+                case "Agregar":
+                    String nombreSucursal = request.getParameter("txtNombreSucursal");
+                    String direccionSucursal = request.getParameter("txtDireccionSucursal");
+                    String telefono = request.getParameter("txtTelefono");
+                    String correoSucursal = request.getParameter("txtCorreoSucursal");
+                    String estado = request.getParameter("txtEstado");
+                    int codigoEmpleado = Integer.parseInt(request.getParameter("txtCodigoEmpleado"));
+                    sucursal.setNombreSucursal(nombreSucursal);
+                    sucursal.setDireccionSucursal(direccionSucursal);
+                    sucursal.setTelefono(telefono);
+                    sucursal.setCorreoSucursal(correoSucursal);
+                    sucursal.setEstado(estado);
+                    sucursal.setCodigoEmpleado(codigoEmpleado);
+                    sucursalDAO.agregar(sucursal);
+                    request.getRequestDispatcher("Controlador?menu=Sucursal&accion=Listar").forward(request, response);
+                    break;
+                case "Editar":
+                    codSucursal = Integer.parseInt(request.getParameter("codigoSucursal"));
+                    Sucursales ss = sucursalDAO.listarCodigoSucursales(codSucursal);
+                    request.setAttribute("sucursal", ss);
+                    request.getRequestDispatcher("Controlador?menu=Sucursal&accion=Listar").forward(request, response);
+                    break;
+                case "Actualizar":
+                    String nomSucursal = request.getParameter("txtNombreSucursal");
+                    String direSucursal = request.getParameter("txtDireccionSucursal");
+                    String tele = request.getParameter("txtTelefono");
+                    String corSucursal = request.getParameter("txtCorreoSucursal");
+                    String estad = request.getParameter("txtEstado");
+                    codigoEmpleado = Integer.parseInt(request.getParameter("txtCodigoEmpleado"));
+                    sucursal.setNombreSucursal(nomSucursal);
+                    sucursal.setDireccionSucursal(direSucursal);
+                    sucursal.setTelefono(tele);
+                    sucursal.setCorreoSucursal(corSucursal);
+                    sucursal.setEstado(estad);
+                    sucursal.setCodigoEmpleado(codigoEmpleado);
+                    sucursal.setCodigoSucursal(codSucursal);
+                    sucursalDAO.actualizar(sucursal);
+                    request.getRequestDispatcher("Controlador?menu=Sucursal&accion=Listar").forward(request, response);
+                    break;
+                case "Eliminar":
+                    codSucursal = Integer.parseInt(request.getParameter("codigoSucursal"));
+                    sucursalDAO.eliminar(codSucursal);
+                    request.getRequestDispatcher("Controlador?menu=Sucursal&accion=Listar").forward(request, response);
+                    break;
+                case "Buscar":
+                    barraBuscar = request.getParameter("txtBuscar");
+                    listaSuc = sucursalDAO.barraBusqueda(barraBuscar);
+                    request.setAttribute("sucursal", listaSuc);
+                break;
+                case "Cancelar":
+                    request.getRequestDispatcher("Controlador?menu=Sucursal&accion=Listar").forward(request, response);
+                break;
+                    
+            }
+            request.getRequestDispatcher("Sucursal.jsp").forward(request, response);
         }else if (menu.equals("NuevaVenta")){
             request.getRequestDispatcher("RegistrarVenta.jsp").forward(request, response);
         }
