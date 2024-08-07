@@ -63,12 +63,12 @@
         
 
         <li id="prestamoNuevo">
-          <a aria-current="page" href="Controlador?menu=Empleado&accion=Listar" target="myFrame">
+          <a aria-current="page" href="Controlador?menu=Prestamo&accion=Listar" target="myFrame">
             <i class="ri-money-dollar-circle-fill"></i>
             <span class="link_name">Solicitar prestamo</span>
           </a>
           <div class="sub-menu blank">
-            <span><a class="link_name" href="#">Solicitar prestamo</a></span>
+            <span><a class="link_name" href="Prestamo.jsp">Solicitar prestamo</a></span>
           </div>
         </li>
 
@@ -85,17 +85,17 @@
             <span><a aria-current="page" href="Controlador?menu=Seguro&accion=Listar" target="myFrame">Seguros</a></span>
             <span><a aria-current="page" href="Controlador?menu=Tarjeta&accion=Listar" target="myFrame">Tarjetas</a></span>
             <span><a href="#">Transacciones</a></span>
-            <span><a href="#">Tipos de Cuentas</a></span>
+            <span><a aria-current="page" href="Controlador?menu=TipoCuenta&accion=Listar" target="myFrame">Tipos de Cuentas</a></span>
           </ul>
         </li>
         
         <li id="prestamoNuevo">
-          <a aria-current="page" href="Controlador?menu=Empleado&accion=Listar" target="myFrame">
+          <a aria-current="page" href="Controlador?menu=Prestamo&accion=Listar" target="myFrame">
             <i class="ri-money-dollar-circle-fill"></i>
             <span class="link_name">Pagos de Prestamos</span>
           </a>
           <div class="sub-menu blank">
-            <span><a class="link_name" href="#">Pagos de Prestamos </a></span>
+            <span><a class="link_name" href="">Pagos de Prestamos </a></span>
           </div>
         </li>
         
@@ -110,12 +110,21 @@
           <ul class="sub-menu">
             <span><a class="link_name" href="#">Seguro</a></span>
             <span><a aria-current="page" href="Controlador?menu=Sucursal&accion=Listar" target="myFrame">Sucursales</a></span>
-            <span><a href="#">Cargos</a></span>
-            <span><a href="#">Dribbble</a></span>
+            <span><a aria-current="page" href="Controlador?menu=CargoEmpleado&accion=Listar" target="myFrame">Cargos</a></span>
+            <span><a aria-current="page" href="Controlador?menu=NuevaTarjeta&accion=Listar" target="myFrame">Dribbble</a></span>
           </ul>
         </li>
+        <li id="prestamoNuevo">
+          <a aria-current="page" href="Controlador?menu=BancoTarjetas&accion=BancoTarjetas" target="myFrame">
+            <i class="ri-money-dollar-circle-fill"></i>
+            <span class="link_name">Pagos de Prestamos</span>
+          </a>
+          <div class="sub-menu blank">
+            <span><a class="link_name" href="Controlador?menu=BancoTarjetas">Pagos de Prestamos </a></span>
+          </div>
+        </li>
         <li id="aperturaCuenta">
-          <a aria-current="page" href="Controlador?menu=DetalleCuenta&accion=Listar" target="myFrame">
+          <a aria-current="page" href="#" target="myFrame">
             <i class="ri-account-circle-fill"></i>
             <span class="link_name">Vista General</span>
           </a>

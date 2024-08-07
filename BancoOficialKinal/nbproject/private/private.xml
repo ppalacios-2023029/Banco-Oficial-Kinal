@@ -3,12 +3,68 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Proyecto-IN5AV/Banco-Oficial-Kinal/BancoOficialKinal/src/java/config/Conexion.java</file>
+        </group>
+        <group>
+            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/src/java/controlador/Controlador.java</file>
+            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/src/java/modelo/EmpleadoDAO.java</file>
+            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/web/Prestamo.jsp</file>
+            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/src/java/config/Conexion.java</file>
+            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/src/java/modelo/PrestamoDAO.java</file>
+            <file>file:/C:/Users/Informatica/Desktop/Banco/Banco-Oficial-Kinal/BancoOficialKinal/src/java/modelo/EmpleadoDAO.java</file>
+            <file>file:/C:/Users/Informatica/Desktop/Banco/Banco-Oficial-Kinal/BancoOficialKinal/src/java/config/Conexion.java</file>
+            <file>file:/C:/Users/Informatica/Desktop/Banco/Banco-Oficial-Kinal/BancoOficialKinal/src/java/controlador/Controlador.java</file>
+            <file>file:/C:/Users/Informatica/Desktop/Banco/Banco-Oficial-Kinal/BancoOficialKinal/src/java/modelo/TipoCuenta.java</file>
+            <file>file:/C:/Users/Informatica/Desktop/Banco/Banco-Oficial-Kinal/BancoOficialKinal/web/System.jsp</file>
+            <file>file:/C:/Users/Informatica/Desktop/Banco/Banco-Oficial-Kinal/BancoOficialKinal/src/java/modelo/TipoCuentaDAO.java</file>
+            <file>file:/C:/Users/Informatica/Desktop/Banco/Banco-Oficial-Kinal/BancoOficialKinal/web/TipoCuenta.jsp</file>
+        </group>
+        <group>
+            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/src/java/controlador/Controlador.java</file>
+            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/src/java/modelo/EmpleadoDAO.java</file>
+            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/web/Prestamo.jsp</file>
+            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/src/java/modelo/PrestamoDAO.java</file>
+            <file>file:/C:/Users/jmgpx/OneDrive/Escritorio/Kinal/Repositorios%20Git/Banco-Oficial-Kinal/BancoOficialKinal/src/java/modelo/TipoCuenta.java</file>
+            <file>file:/C:/Users/jmgpx/OneDrive/Escritorio/Kinal/Repositorios%20Git/Banco-Oficial-Kinal/BancoOficialKinal/src/java/controlador/Controlador.java</file>
+            <file>file:/C:/Users/jmgpx/OneDrive/Escritorio/Kinal/Repositorios%20Git/Banco-Oficial-Kinal/BancoOficialKinal/src/java/modelo/EmpleadoDAO.java</file>
+            <file>file:/C:/Users/jmgpx/OneDrive/Escritorio/Kinal/Repositorios%20Git/Banco-Oficial-Kinal/BancoOficialKinal/src/java/modelo/TipoCuentaDAO.java</file>
+            <file>file:/C:/Users/jmgpx/OneDrive/Escritorio/Kinal/Repositorios%20Git/Banco-Oficial-Kinal/BancoOficialKinal/web/TipoCuenta.jsp</file>
+        </group>
+        <group>
+            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/web/Carrito.jsp</file>
+            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/web/NuevaTarjeta.jsp</file>
+            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/web/System.jsp</file>
+            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/web/home.jsp</file>
+            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/src/java/config/Conexion.java</file>
+            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/web/js/funciones.js</file>
+            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/src/java/controlador/ControladorNuevaTarjeta.java</file>
+            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/web/Empleado.jsp</file>
+            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/src/java/modelo/NuevaTarjetaDAO.java</file>
+            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/src/java/controlador/Controlador.java</file>
+            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/web/BancoTarjetas.jsp</file>
+            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/src/java/modelo/EmpleadoDAO.java</file>
+            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/src/java/modelo/Carrito.java</file>
+            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/src/java/modelo/NuevaTarjeta.java</file>
+            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/src/java/modelo/Empleado.java</file>
+            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/src/java/controlador/Validar.java</file>
             <file>file:/C:/Users/HP/Desktop/quinto/taller/Bimestre%204/BancoOficialKinal/src/java/modelo/SucursalesDAO.java</file>
             <file>file:/C:/Users/HP/Desktop/quinto/taller/Bimestre%204/BancoOficialKinal/src/java/modelo/Sucursales.java</file>
             <file>file:/C:/Users/HP/Desktop/quinto/taller/Bimestre%204/BancoOficialKinal/src/java/modelo/EmpleadoDAO.java</file>
             <file>file:/C:/Users/HP/Desktop/quinto/taller/Bimestre%204/BancoOficialKinal/src/java/controlador/Controlador.java</file>
             <file>file:/C:/Users/HP/Desktop/quinto/taller/Bimestre%204/BancoOficialKinal/web/Sucursal.jsp</file>
             <file>file:/C:/Users/HP/Desktop/quinto/taller/Bimestre%204/BancoOficialKinal/src/java/config/Conexion.java</file>
+        </group>
+        <group>
+            <file>file:/C:/Users/Informatica/Banco-Oficial-Kinal/BancoOficialKinal/web/CargoEmpleado.jsp</file>
+        </group>
+        <group>
+            <file>file:/C:/Users/Informatica/Banco-Oficial-Kinal/BancoOficialKinal/src/java/modelo/CargoEmpleadoDAO.java</file>
+            <file>file:/C:/Users/Informatica/Banco-Oficial-Kinal/BancoOficialKinal/src/java/modelo/CargoEmpleado.java</file>
+            <file>file:/C:/Users/Informatica/Banco-Oficial-Kinal/BancoOficialKinal/src/java/controlador/Controlador.java</file>
+            <file>file:/C:/Users/Informatica/Banco-Oficial-Kinal/BancoOficialKinal/web/CargoEmpleado.jsp</file>
+            <file>file:/C:/Users/Informatica/Desktop/Banco/Banco-Oficial-Kinal/BancoOficialKinal/src/java/config/Conexion.java</file>
+            <file>file:/C:/Users/Informatica/Desktop/Banco/Banco-Oficial-Kinal/BancoOficialKinal/src/java/controlador/Controlador.java</file>
+            <file>file:/C:/Users/Informatica/Desktop/Banco/Banco-Oficial-Kinal/BancoOficialKinal/web/TipoCuenta.jsp</file>
         </group>
         <group/>
         <group/>
