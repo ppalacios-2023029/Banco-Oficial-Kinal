@@ -31,7 +31,7 @@
                         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fa fa-cart-plus">(<label style="color: orange;">${contador}</label>)</i>Carrito</a>
+                        <a class="nav-link" href="Controlador?menu=BancoTarjetas&accion=Carrito"><i class="fa fa-cart-plus">(<label style="color: orange;">${contador}</label>)</i>Carrito</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
@@ -70,7 +70,7 @@
                                 <label for="">${p.getDescripcion()}</label>
                                 <div >
                                     <a href="Controlador?menu=BancoTarjetas&accion=AgregarCarrito&id=${p.getCodigoNuevaTarjeta()}" class="btn  btn-outline-info">Agregar Carrito</a>
-                                    <a href="" class=" btn btn-danger">Comprar</a>
+                                    <a href="Controlador?menu=BancoTarjetas&accion=Carrito" class="btn btn-danger">Comprar</a>
                                 </div>
                             </div>
                         </div>
