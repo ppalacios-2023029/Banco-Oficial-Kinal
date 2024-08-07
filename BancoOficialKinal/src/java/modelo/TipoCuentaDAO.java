@@ -40,9 +40,68 @@ public class TipoCuentaDAO {
         return listaTipoCuenta;
     }
     
+    public boolean contieneLetras(String cadena) {
+        for (int i = 0; i < cadena.length(); i++) {
+            if (Character.isLetter(cadena.charAt(i))) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public int limpiarDecimales(String cadena) {
+        try {
+            // Convertir la cadena a un número decimal (double)
+            double numeroDecimal = Double.parseDouble(cadena);
+
+            // Usar Math.floor para redondear hacia abajo y convertir a int
+            return (int) Math.floor(numeroDecimal);
+        } catch (NumberFormatException e) {
+            // Manejo de error si la cadena no es un número válido
+            System.err.println("Error: La cadena '" + cadena + "' no es un número válido.");
+            return 0; // Valor predeterminado en caso de error
+        }
+    }
+    
+    public List barraBusqueda(String info) {
+        String sql = "Select * from TipoCuenta where TipoCuenta like ? or estado like ? or codigoTipoCuenta like ?";
+        List<TipoCuenta> listaTipoCuenta = new ArrayList<TipoCuenta>();
+
+        try {
+            con = cn.Conexion();
+            ps = con.prepareStatement(sql);
+
+            ps.setString(1, info);
+            ps.setString(2, info);
+            if (contieneLetras(info) == true) {
+                ps.setInt(3, 0);
+            } else {
+                int numFuncional = limpiarDecimales(info);
+                ps.setInt(3, numFuncional);
+            }
+            
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                TipoCuenta tc = new TipoCuenta();
+                
+                tc.setCodigoTipoCuenta(rs.getInt(1));
+                tc.setTipoCuenta(rs.getString(2));
+                tc.setSaldoMinimoRequerido(rs.getDouble(3));
+                tc.setTazaDeInteres(rs.getDouble(4));
+                tc.setTazaDeImpuestos(rs.getDouble(5));
+                tc.setEstado(rs.getString(6));
+                listaTipoCuenta.add(tc);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listaTipoCuenta;
+    }
+    
     // Método Agregar
     public int agregar(TipoCuenta tc){
-        String sql = "insert into TipoCuenta (tipoCuenta, saldoMinimoRequerido, tazaDeInteres, tazaDeImpuestos, estado) values (?, ?, ?, ?, ?)";
+        String sql = "insert into TipoCuenta (TipoCuenta, SaldoMinimoRequerido, TasaDeInteres, TazaDeImpuestos, estado) values (?, ?, ?, ?, ?)";
         try{
             con = cn.Conexion();
             ps = con.prepareStatement(sql);
@@ -81,7 +140,7 @@ public class TipoCuentaDAO {
     
     // Método Editar
     public int actualizar(TipoCuenta tc){
-        String sql = "Update TipoCuenta set tipoCuenta = ?, saldoMinimoRequerido = ?, tazaDeInteres = ?, tazaDeImpuestos = ?, estado = ? where codigoTipoCuenta = ?";
+        String sql = "Update TipoCuenta set TipoCuenta = ?, SaldoMinimoRequerido = ?, TasaDeInteres = ?, TazaDeImpuestos = ?, estado = ? where codigoTipoCuenta = ?";
         try{
             con = cn.Conexion();
             ps = con.prepareStatement(sql);

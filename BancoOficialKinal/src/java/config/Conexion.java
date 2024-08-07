@@ -12,6 +12,7 @@ public class Conexion {
         try{
             Class.forName("com.mysql.jdbc.Driver");
 //            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/DBBancoOficialKinal?useSSL=false", "root", "admin");
+            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/DBBancoOficialKinal?useSSL=false", "Jose_Gonzalez", "rootPasword24");
             //conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/DBBancoOficialKinal?useSSL=false", "IN5AV", "admin");            
         }catch(Exception e){
             e.printStackTrace();

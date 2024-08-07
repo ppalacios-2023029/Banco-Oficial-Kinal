@@ -2,20 +2,20 @@ package modelo;
 
 import java.util.Date;
 
-public class Prestamos {
+public class Prestamo {
     private int codigoPrestamo;
     private double monto;
     private String tipoPrestamo;
     private double tasaInteres;
-    private Date fechaInicio;
-    private Date fechaVencimiento;
+    private String fechaInicio;
+    private String fechaVencimiento;
     private String estado;
     private int codigoCliente;
 
-    public Prestamos() {
+    public Prestamo() {
     }
 
-    public Prestamos(int codigoPrestamo, double monto, String tipoPrestamo, double tasaInteres, Date fechaInicio, Date fechaVencimiento, String estado, int codigoCliente) {
+    public Prestamo(int codigoPrestamo, double monto, String tipoPrestamo, double tasaInteres, String fechaInicio, String fechaVencimiento, String estado, int codigoCliente) {
         this.codigoPrestamo = codigoPrestamo;
         this.monto = monto;
         this.tipoPrestamo = tipoPrestamo;
@@ -25,8 +25,6 @@ public class Prestamos {
         this.estado = estado;
         this.codigoCliente = codigoCliente;
     }
-
-    
 
     public int getCodigoPrestamo() {
         return codigoPrestamo;
@@ -60,19 +58,19 @@ public class Prestamos {
         this.tasaInteres = tasaInteres;
     }
 
-    public Date getFechaInicio() {
+    public String getFechaInicio() {
         return fechaInicio;
     }
 
-    public void setFechaInicio(Date fechaInicio) {
+    public void setFechaInicio(String fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
 
-    public Date getFechaVencimiento() {
+    public String getFechaVencimiento() {
         return fechaVencimiento;
     }
 
-    public void setFechaVencimiento(Date fechaVencimiento) {
+    public void setFechaVencimiento(String fechaVencimiento) {
         this.fechaVencimiento = fechaVencimiento;
     }
 
@@ -83,7 +81,7 @@ public class Prestamos {
     public void setEstado(String estado) {
         this.estado = estado;
     }
-    
+
     public int getCodigoCliente() {
         return codigoCliente;
     }
@@ -91,6 +89,7 @@ public class Prestamos {
     public void setCodigoCliente(int codigoCliente) {
         this.codigoCliente = codigoCliente;
     }
+    
     
     
 }

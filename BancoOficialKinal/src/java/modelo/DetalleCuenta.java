@@ -1,10 +1,9 @@
 package modelo;
 
-import java.util.Date;
 
 public class DetalleCuenta {
     private int codigoDetalleCuenta;
-    private Date fechaDetalle;
+    private String fechaDetalle;
     private String tipoOperacion;
     private String estadoCuenta;
     private int codigoCliente;
@@ -14,7 +13,7 @@ public class DetalleCuenta {
     public DetalleCuenta() {
     }
 
-    public DetalleCuenta(int codigoDetalleCuenta, Date fechaDetalle, String tipoOperacion, String estadoCuenta, int codigoCliente, int codigoEmpleado, int codigoSucursal) {
+    public DetalleCuenta(int codigoDetalleCuenta, String fechaDetalle, String tipoOperacion, String estadoCuenta, int codigoCliente, int codigoEmpleado, int codigoSucursal) {
         this.codigoDetalleCuenta = codigoDetalleCuenta;
         this.fechaDetalle = fechaDetalle;
         this.tipoOperacion = tipoOperacion;
@@ -32,11 +31,11 @@ public class DetalleCuenta {
         this.codigoDetalleCuenta = codigoDetalleCuenta;
     }
 
-    public Date getFechaDetalle() {
+    public String getFechaDetalle() {
         return fechaDetalle;
     }
 
-    public void setFechaDetalle(Date fechaDetalle) {
+    public void setFechaDetalle(String fechaDetalle) {
         this.fechaDetalle = fechaDetalle;
     }
 
