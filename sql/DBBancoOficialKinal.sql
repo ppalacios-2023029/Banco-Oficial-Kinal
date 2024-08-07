@@ -199,5 +199,6 @@ INSERT INTO DetalleCuenta (fechaDetalle, tipoOperacion, estadoCuenta, codigoClie
 select * from Empleados where usuario='neryd' and contrasena = '1234';
 select * from CargoEmpleado;
 
-
 Select * from Empleados where nombreEmpleado like '' or apellidoEmpleado like '' or usuario like 'neryd' or contrasena like '' or cargo like '' or salario like 0.0 or oficina like '' or estado like '' or codigoCargoEmpleado like 1 ;
+
+Select * from Prestamos where codigoPrestamo like 1 or monto like 0.0 or tipoPrestamo like '' or tasaInteres like 0.0 or fechaInicio like '' or fechaVencimiento like '' or estado like '' or codigoCliente like 1;

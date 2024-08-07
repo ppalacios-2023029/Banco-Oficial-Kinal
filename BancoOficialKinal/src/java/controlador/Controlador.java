@@ -47,6 +47,8 @@ public class Controlador extends HttpServlet {
     int codPrestamos;
     String barraBuscar;
     List listaEmp;
+    List listaPres;
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -204,6 +206,12 @@ public class Controlador extends HttpServlet {
                 
                 case "Cancelar":
                     request.getRequestDispatcher("Controlador?menu=Prestamo&accion=Listar").forward(request, response);
+                break;
+                
+                case "Buscar":
+                    barraBuscar = request.getParameter("txtBuscar");
+                    listaPres = prestamosDAO.barraBusqueda(barraBuscar);
+                    request.setAttribute("Prestamo", listaPres);
                 break;
             }
             
