@@ -116,6 +116,19 @@ create table Tarjetas (
     constraint FK_Tarjetas_Clientes foreign key(codigoCliente) references Clientes(codigoCliente)
 );
 
+create table ProductoTarjeta(
+	codigoProductoTarjeta int not null auto_increment,
+    titulo varchar(50) not null,
+    imagen longblob ,
+    descripcion varchar(50) not null,
+    cargoPorUso decimal(10,2) not null,
+    primary key PK_codigoProductoTarjeta(codigoProductoTarjeta)
+);
+select * from ProductoTarjeta;
+SELECT codigoProductoTarjeta, imagen
+FROM ProductoTarjeta
+WHERE codigoProductoTarjeta = 1;
+
 create table Seguro(
 	numeroSeguro int not null,
     numeroPoliza varchar(20) not null,

@@ -6,18 +6,26 @@
 package controlador;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import modelo.Empleado;
 import modelo.EmpleadoDAO;
 import modelo.Prestamo;
 import modelo.PrestamoDAO;
 import modelo.CargoEmpleadoDAO;
+import modelo.Carrito;
+import modelo.NuevaTarjeta;
+import modelo.NuevaTarjetaDAO;
+
 import modelo.TipoCuenta;
 import modelo.TipoCuentaDAO;
 import modelo.Clientes;
@@ -26,10 +34,16 @@ import modelo.ClienteDAO;
  *
  * @author neryd
  */
+@MultipartConfig
 public class Controlador extends HttpServlet {
+
     Empleado empleado = new Empleado();
     EmpleadoDAO empleadoDAO = new EmpleadoDAO();
     CargoEmpleadoDAO cargoEmpleadoDAO = new CargoEmpleadoDAO();
+    Prestamos prestamos = new Prestamos();
+    PrestamosDAO prestamosDAO = new PrestamosDAO();
+    NuevaTarjeta nt = new NuevaTarjeta();
+    NuevaTarjetaDAO ntDAO = new NuevaTarjetaDAO();
     
     Prestamo prestamos = new Prestamo();
     PrestamoDAO prestamosDAO = new PrestamoDAO();
@@ -47,6 +61,14 @@ public class Controlador extends HttpServlet {
     int codPrestamos;
     String barraBuscar;
     List listaEmp;
+    List<NuevaTarjeta> listaNuevaTarjeta = new ArrayList<>();
+    List<Carrito> listaCarrito = new ArrayList<>();
+    int item;
+    double totalPagar = 0.0;
+    int cantidad = 1;
+    int idp;
+    Carrito car;
+
     List listaPres;
     
     /**
@@ -62,19 +84,151 @@ public class Controlador extends HttpServlet {
             throws ServletException, IOException {
         String menu = request.getParameter("menu");
         String accion = request.getParameter("accion");
-        
-        if(menu.equals("home")){
+        listaNuevaTarjeta = ntDAO.listar();
+        if (menu.equals("home")) {
             request.getRequestDispatcher("home.jsp").forward(request, response);
-        }else if(menu.equals("System")){
+        } else if (menu.equals("System")) {
             request.getRequestDispatcher("System.jsp").forward(request, response);
-        }else if(menu.equals("Empleado")){
-            switch(accion){
+        } else if (menu.equals("NuevaTarjeta")) {
+            switch (accion) {
+                case "Listar":
+                    List<NuevaTarjeta> lista = ntDAO.listar();
+                    request.setAttribute("listaNuevaTarjeta", lista);
+
+                    break;
+                case "AgregarCarrito":
+                    int idp = Integer.parseInt(request.getParameter("id"));
+                    break;
+
+                case "Guardar":
+                    String titulo = request.getParameter("txtTitulo");
+                    Part part = request.getPart("imagen");
+                    String descripcion = request.getParameter("txtDescripcion");
+                    InputStream inputStream = part.getInputStream();
+                    double monto = Double.parseDouble(request.getParameter("txtMonto"));
+                    nt.setTitulo(titulo);
+                    nt.setImagen(inputStream);
+                    nt.setDescripcion(descripcion);
+                    nt.setMonto(monto);
+                    ntDAO.agregar(nt);
+                    request.getRequestDispatcher("Controlador?menu=ProductoTarjeta&accion=Listar").forward(request, response);
+                    break;
+                default:
+                    request.setAttribute("nuevaTarjeta", listaNuevaTarjeta);
+            }
+            request.getRequestDispatcher("NuevaTarjeta.jsp").forward(request, response);
+        } else if (menu.equals("BancoTarjetas")) {
+            switch (accion) {
+                case "Listar":
+                    List<NuevaTarjeta> lista = ntDAO.listar();
+                    request.setAttribute("listaNuevaTarjeta", lista);
+
+                    break;
+                case "Comprar":
+                    totalPagar = 0.0;
+                    idp = Integer.parseInt(request.getParameter("id"));
+                    nt = ntDAO.listarId(idp);
+                    item = item + 1;
+                    car = new Carrito();
+                    car.setItem(item);
+                    car.setIdNuevaTargeta(nt.getCodigoNuevaTarjeta());
+                    car.setTitulo(nt.getTitulo());
+                    car.setDescripcion(nt.getDescripcion());
+                    car.setMonto(nt.getMonto());
+                    car.setCantidad(cantidad);
+                    car.setSubTotal(cantidad * nt.getMonto());
+                    listaCarrito.add(car);
+                    for (int i = 0; i < listaCarrito.size(); i++) {
+                        totalPagar = totalPagar + listaCarrito.get(i).getSubTotal();
+                    }
+                    request.setAttribute("totalPagar", totalPagar);
+                    request.setAttribute("carrito", listaCarrito);
+                    request.setAttribute("contador", listaCarrito.size());
+                    request.getRequestDispatcher("Carrito.jsp").forward(request, response);
+                    break;
+
+                case "AgregarCarrito":
+                    int pos = -1; // Usamos -1 como valor por defecto para indicar que el item no está en la lista
+                    cantidad = 1;
+                    idp = Integer.parseInt(request.getParameter("id"));
+                    nt = ntDAO.listarId(idp);
+
+// Verificar si el producto ya está en el carrito
+                    for (int i = 0; i < listaCarrito.size(); i++) {
+                        if (idp == listaCarrito.get(i).getIdNuevaTargeta()) {
+                            pos = i;
+                            break;
+                        }
+                    }
+
+                    if (pos != -1) {
+                        // Si el producto ya está en el carrito, actualizamos la cantidad y el subtotal
+                        cantidad = listaCarrito.get(pos).getCantidad() + 1; // Incrementa la cantidad por 1
+                        double subtotal = listaCarrito.get(pos).getMonto() * cantidad;
+                        listaCarrito.get(pos).setCantidad(cantidad);
+                        listaCarrito.get(pos).setSubTotal(subtotal);
+                    } else {
+                        // Si el producto no está en el carrito, lo agregamos
+                        item = item + 1;
+                        car = new Carrito();
+                        car.setItem(item);
+                        car.setIdNuevaTargeta(nt.getCodigoNuevaTarjeta());
+                        car.setTitulo(nt.getTitulo());
+                        car.setDescripcion(nt.getDescripcion());
+                        car.setMonto(nt.getMonto());
+                        car.setCantidad(cantidad);
+                        car.setSubTotal(cantidad * nt.getMonto());
+                        listaCarrito.add(car);
+                    }
+
+                    request.setAttribute("contador", listaCarrito.size());
+                    request.getRequestDispatcher("Controlador?accion=BancoTarjetas").forward(request, response);
+                    break;
+                case "Delete":
+                    int idproducto = Integer.parseInt(request.getParameter("idp"));
+                    for (int i = 0; i < listaCarrito.size(); i++) {
+                        if (listaCarrito.get(i).getItem() == idproducto) {
+                            listaCarrito.remove(i);
+                        }
+                    }
+
+                    request.getRequestDispatcher("Controlador?menu=BancoTarjetas&accion=Carrito").forward(request, response);
+                    break;
+                case "Carrito":
+                    totalPagar = 0.0;
+                    request.setAttribute("carrito", listaCarrito);
+                    for (int i = 0; i < listaCarrito.size(); i++) {
+                        totalPagar = totalPagar + listaCarrito.get(i).getSubTotal();
+                    }
+                    request.setAttribute("totalPagar", totalPagar);
+                    request.getRequestDispatcher("Carrito.jsp").forward(request, response);
+                    break;
+                case "Guardar":
+                    String titulo = request.getParameter("txtTitulo");
+                    Part part = request.getPart("imagen");
+                    String descripcion = request.getParameter("txtDescripcion");
+                    InputStream inputStream = part.getInputStream();
+                    double monto = Double.parseDouble(request.getParameter("txtMonto"));
+                    nt.setTitulo(titulo);
+                    nt.setImagen(inputStream);
+                    nt.setDescripcion(descripcion);
+                    nt.setMonto(monto);
+                    ntDAO.agregar(nt);
+                    request.getRequestDispatcher("Controlador?menu=ProductoTarjeta&accion=Listar").forward(request, response);
+                    break;
+                default:
+                    request.setAttribute("nuevaTarjeta", listaNuevaTarjeta);
+                    request.getRequestDispatcher("BancoTarjetas.jsp").forward(request, response);
+            }
+
+        } else if (menu.equals("Empleado")) {
+            switch (accion) {
                 case "Listar":
                     List listaEmpleado = empleadoDAO.listar();
                     List listaCargoEmpleado = cargoEmpleadoDAO.listar();
                     request.setAttribute("empleados", listaEmpleado);
                     request.setAttribute("cargoEmpleados", listaCargoEmpleado);
-                break;
+                    break;
                 case "Agregar":
                     String nombreEmpleado = request.getParameter("txtNombreEmpleado");
                     String apellidoEmpleado = request.getParameter("txtApellidoEmpleado");
@@ -96,14 +250,14 @@ public class Controlador extends HttpServlet {
                     empleado.setCodigoCargoEmpleado(codigoCargoEmpleado);
                     empleadoDAO.agregar(empleado);
                     request.getRequestDispatcher("Controlador?menu=Empleado&accion=Listar").forward(request, response);
-                    
-                break;
+
+                    break;
                 case "Editar":
                     codigoEmpleado = Integer.parseInt(request.getParameter("codigoEmpleado"));
                     Empleado emd = empleadoDAO.listarCodigoEmpleado(codigoEmpleado);
                     request.setAttribute("empleado", emd);
                     request.getRequestDispatcher("Controlador?menu=Empleado&accion=Listar").forward(request, response);
-                break;
+                    break;
                 case "Actualizar":
                     String nomEmp = request.getParameter("txtNombreEmpleado");
                     String apellEmp = request.getParameter("txtApellidoEmpleado");
@@ -126,22 +280,26 @@ public class Controlador extends HttpServlet {
                     empleado.setCodigoEmpleado(codigoEmpleado);
                     empleadoDAO.actualizar(empleado);
                     request.getRequestDispatcher("Controlador?menu=Empleado&accion=Listar").forward(request, response);
-                break;
+                    break;
                 case "Eliminar":
                     codigoEmpleado = Integer.parseInt(request.getParameter("codigoEmpleado"));
                     empleadoDAO.eliminar(codigoEmpleado);
                     request.getRequestDispatcher("Controlador?menu=Empleado&accion=Listar").forward(request, response);
-                break;
-     
+                    break;
+
                 case "Buscar":
                     barraBuscar = request.getParameter("txtBuscar");
                     listaEmp = empleadoDAO.barraBusqueda(barraBuscar);
                     request.setAttribute("empleados", listaEmp);
-                break;
+                    break;
                 case "Cancelar":
                     request.getRequestDispatcher("Controlador?menu=Empleado&accion=Listar").forward(request, response);
-                break;
+                    break;
             }
+            request.getRequestDispatcher("Empleado.jsp").forward(request, response);
+        } else if (menu.equals("Prestamo")) {
+
+        } else if (menu.equals("Cliente")) {
             request.getRequestDispatcher("Empleado.jsp").forward(request,response);
             
         //PRESTAMO
@@ -246,9 +404,9 @@ public class Controlador extends HttpServlet {
                 break;
             }
             request.getRequestDispatcher("Cliente.jsp").forward(request, response);
-        }else if (menu.equals("Producto")){
+        } else if (menu.equals("Producto")) {
             request.getRequestDispatcher("Producto.jsp").forward(request, response);
-        }else if (menu.equals("NuevaVenta")){
+        } else if (menu.equals("NuevaVenta")) {
             request.getRequestDispatcher("RegistrarVenta.jsp").forward(request, response);
         }
     }
@@ -266,6 +424,7 @@ public class Controlador extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+
     }
 
     /**
@@ -280,9 +439,9 @@ public class Controlador extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+
     }
-    
-    
+
     /**
      * Returns a short description of the servlet.
      *

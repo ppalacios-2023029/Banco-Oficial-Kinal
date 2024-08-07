@@ -18,5 +18,23 @@
             <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/web/Prestamo.jsp</file>
             <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/src/java/modelo/PrestamoDAO.java</file>
         </group>
+        <group>
+            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/web/Carrito.jsp</file>
+            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/web/NuevaTarjeta.jsp</file>
+            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/web/System.jsp</file>
+            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/web/home.jsp</file>
+            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/src/java/config/Conexion.java</file>
+            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/web/js/funciones.js</file>
+            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/src/java/controlador/ControladorNuevaTarjeta.java</file>
+            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/web/Empleado.jsp</file>
+            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/src/java/modelo/NuevaTarjetaDAO.java</file>
+            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/src/java/controlador/Controlador.java</file>
+            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/web/BancoTarjetas.jsp</file>
+            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/src/java/modelo/EmpleadoDAO.java</file>
+            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/src/java/modelo/Carrito.java</file>
+            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/src/java/modelo/NuevaTarjeta.java</file>
+            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/src/java/modelo/Empleado.java</file>
+            <file>file:/C:/GitIN5AV2024/Banco-Oficial-Kinal/BancoOficialKinal/src/java/controlador/Validar.java</file>
+        </group>
     </open-files>
 </project-private>
